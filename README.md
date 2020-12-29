@@ -17,6 +17,7 @@
 	pinterest.co.uk/pin/149885493834865228/
 	Home page hero:
 	https://pixabay.com/illustrations/computer-sketching-working-2271010/	(Image by <a href="https://pixabay.com/users/dizer-1604004/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2271010">Orion Quest</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2271010">Pixabay</a>)
+    https://pixabay.com/photos/laptop-human-hands-keyboard-typing-820274/   (Image by <a href="https://pixabay.com/users/fancycrave1-1115284/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=820274">fancycrave1</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=820274">Pixabay</a>)
 
 # Icons
 

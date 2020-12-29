@@ -13,6 +13,21 @@
     --paragraph-text-font: 'Roboto';
 }
 
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    color: var(--big-text-color);
+    font-family: var(--paragraph-text-font);
+}
+
+i {
+    color: var(--button-bg-color);
+    font-size: xx-large;
+}
 .nav {
     height: 44px;
     background-color: var(--alternate-bg-color);
@@ -37,7 +52,7 @@
     background-color: var(--main-bg-color);
 }
 
-.hero {
+.hero-bg {
     background: url('/static/images/web_dev_sketch.png');
     background-position: center; 
     background-repeat: no-repeat;
@@ -58,9 +73,12 @@
 
 .tagline-container {
     height: 216px;
-    width: 90%;
     display: flex;
     align-items: center;
+}
+
+.central-container {
+    width: 90%;
 }
 
 .tagline {
@@ -72,14 +90,94 @@
 }
 
 @media (min-width: 600px) {
-    .tagline-container {
+    .central-container {
         width: 80%;
     }
 }
 
 @media (min-width: 1000px) {
-    .tagline-container {
+    .central-container {
         width: 66%;
         max-width: 950px;
     }
+}
+
+#contact_tab {
+    -ms-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    background-color: var(--button-bg-color);
+    color: var(--big-text-color);
+    position: fixed;
+    top: 50%;
+    right: -80px;
+    font-size: 35px;
+    padding-left: 20px;
+    padding-right: 20px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    z-index: 1000;
+    visibility: visible;
+    /* opacity: 0; */
+}
+
+section {
+    margin-top: 32px;
+}
+
+.feature-title{
+    font-family: var(--paragraph-text-font);
+    font-size: 2rem;
+    color: var(--big-text-color);
+}
+
+.image-container {
+    width: 100%;
+}
+
+#seo_meter {
+    filter: invert(100%);
+}
+
+.button-container {
+    height: 100px;
+}
+
+.button {
+    background-color: var(--button-bg-color);
+    color: var(--big-text-color);
+}
+
+.blog-bg {
+    background: url('/static/images/home_blog.jpg');
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    /* height: 216px; */
+}
+
+#blog_title {
+    margin: 16px 0;
+    padding: 0 32px;
+}
+
+.footer {
+    background-color: var(--alternate-bg-color);
+}
+
+.footer-title {
+    text-align: center;
+    font-family: var(--header-text-font);
+    color: var(--header-text-color);
+    font-size: 24px;
+}
+
+.social-container {
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
 }
