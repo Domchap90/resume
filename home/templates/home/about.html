@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="below-nav">
+    <div class="hero">
+        <div class="container central-container my-6">    
+            <div class="tile is-ancestor">
+                <div class="tile is-4 is-parent">
+                        <div class="tile is-child">
+                            <div class="tile">
+                                <img src="{% static 'images/profile.jpg' %}" alt="Image of Dominic Chaple">
+                            </div>
+                        </div>
+                </div>
+                <div class="tile is-parent">
+                    <div class="tile is-child main-tile" id="title_tile">
+                        <div class="tile center">About Me</div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="tile is-ancestor mt-3">
+                <div class="tile is-parent">
+                    <div class="tile is-child main-tile">
+                        <div class="tile center bright-green-bg">How I got started</div>
+                    </div>
+                </div>
+                <div class="tile is-parent is-vertical">
+                    <div class="tile is-child">
+                        <div class="tile">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
+                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                                in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  
+            <h2 class="feature-title center">Experience with Technologies</h2>
+            
+            <div class="tile is-ancestor mt-6">
+                <div class="tile is-4 is-parent is-vertical">
+                    <div class="tile is-child">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-square">
+                                    <img src="{% static '/images/python.png' %}" alt="Python Logo">
+                                </figure>
+                            </div>
+                            <div class="card-content">                        
+                                <div class="content">
+                                    Proficiency <progress class="progress is-primary" value="15" max="100">15%</progress>
+                                    Experience <progress class="progress is-link" value="30" max="100">30%</progress>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile is-child">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-square">
+                                    <img src="{% static '/images/django.png' %}" alt="Django Logo">
+                                </figure>
+                            </div>
+                            <div class="card-content">                        
+                                <div class="content">
+                                    Proficiency <progress class="progress is-primary" value="15" max="100">15%</progress>
+                                    Experience <progress class="progress is-link" value="30" max="100">30%</progress>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tile is-child">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-square">
+                                    <img src="{% static '/images/jasmine.png' %}" alt="Jasmine Logo">
+                                </figure>
+                            </div>
+                            <div class="card-content">                        
+                                <div class="content">
+                                    Proficiency <progress class="progress is-primary" value="15" max="100">15%</progress>
+                                    Experience <progress class="progress is-link" value="30" max="100">30%</progress>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="tile is-parent is-vertical">
+                    <div class="tile is-child">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-square">
+                                    <img src="{% static '/images/js.png' %}" alt="JavaScript logo" id="js_logo">
+                                </figure>
+                            </div>
+                            <div class="card-content">                        
+                                <div class="content">
+                                    Proficiency <progress class="progress is-primary" value="15" max="100">15%</progress>
+                                    Experience <progress class="progress is-link" value="30" max="100">30%</progress>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tile is-child">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-square">
+                                    <img src="{% static '/images/mysql.png' %}" alt="MySQL logo">
+                                </figure>
+                            </div>
+                            <div class="card-content">                        
+                                <div class="content">
+                                    Proficiency <progress class="progress is-primary" value="15" max="100">15%</progress>
+                                    Experience <progress class="progress is-link" value="30" max="100">30%</progress>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tile is-child">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-square">
+                                    <img src="{% static '/images/heroku.png' %}" alt="Heroku logo">
+                                </figure>
+                            </div>
+                            <div class="card-content">                        
+                                <div class="content">
+                                    Proficiency <progress class="progress is-primary" value="15" max="100">15%</progress>
+                                    Experience <progress class="progress is-link" value="30" max="100">30%</progress>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile is-parent is-vertical">
+                    <div class="tile is-child">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-square">
+                                    <img src="{% static '/images/html.png' %}" alt="HTML logo">
+                                </figure>
+                            </div>
+                            <div class="card-content">                        
+                                <div class="content">
+                                    Proficiency <progress class="progress is-primary" value="15" max="100">15%</progress>
+                                    Experience <progress class="progress is-link" value="30" max="100">30%</progress>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tile is-child">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-square">
+                                    <img src="{% static '/images/mongodb.png' %}" alt="MongoDB logo">
+                                </figure>
+                            </div>
+                            <div class="card-content">                        
+                                <div class="content">
+                                    Proficiency <progress class="progress is-primary" value="15" max="100">15%</progress>
+                                    Experience <progress class="progress is-link" value="30" max="100">30%</progress>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> 
+            </div>
+
+            <hr>
+                   
+            <div class="tile is-ancestor mt-3">
+
+                <div class="tile is-parent is-5">
+                    <div class="tile is-child main-tile">
+                        <div class="tile center neon-yellow-bg" id="education_tile">Education</div>
+                    </div>
+                </div>
+
+                <div class="tile is-parent is-vertical">
+                    <div class="tile is-child">
+                        <div class="tile white-bg">
+                            <img src="{% static 'images/universityofsheffield.png' %}" alt="University of Sheffield logo">
+                        </div>
+                    </div>
+
+                    <div class="tile is-child">
+                        <div class="tile center">
+                            <ul>
+                                <li>Second Class Honours</li>
+                                <li>Theoretical Physics</li>
+                                <li>University of Sheffield</li>
+                            </ul>
+                        </div>
+                    </div> 
+                    
+                    <div class="tile is-child">
+                        <div class="tile">
+                            <img src="{% static 'images/codeinstitute.png' %}" alt="Code Institute logo">
+                        </div>
+                    </div>
+
+                    <div class="tile is-child">
+                        <div class="tile center">
+                            <ul>
+                                <li>Second Class Honours</li>
+                                <li>Full Stack Web Developer</li>
+                                <li>Code Institute</li>
+                            </ul>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="contact_tab">
+        <a href="#">contact me</a>
+    </div>
+
+    
+</div>
+{% endblock %}

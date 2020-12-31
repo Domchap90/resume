@@ -15,6 +15,7 @@
         {% block corecss %}
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lexend+Tera&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
         <script src="https://kit.fontawesome.com/d19a086ec7.js" crossorigin="anonymous"></script>
@@ -44,11 +45,12 @@
             
             <nav class="level nav">
                 <div class="level-left">
-                    <h1 class="level-item logo">DC Developer</h1>
+                    <img src="{% static 'images/logo.png' %}" alt="DC logo" id="nav_logo">
+                    <h1 class="level-item logo">WEB DEVELOPMENT</h1>
                 </div>
 
                 <div class="level-right nav-menu-options">
-                    <p class="level-item">About</p>
+                    <p class="level-item"><a href="{% url 'about' %}">About</a></p>
                     <p class="level-item">Blog</p>
                     <p class="level-item">Services</p>
                     <p class="level-item">Portfolio</p>
@@ -64,6 +66,32 @@
 
         {% block content %}
         {% endblock %}
+
+        <footer class="footer">
+            <div class="container central-container">
+                <div class="center">
+                    <h3 class="footer-title mb-5">Follow Me on Social Media</h3>
+                </div>
+        
+                <div class="center">
+                    <div class="social-container">
+                        <i class="fab fa-linkedin is-large"></i>
+                        <i class="fab fa-twitter-square is-large"></i>
+                        <i class="fab fa-github-square is-large"></i>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="footer-title my-5">Or contact me directly</h3>
+                    <div class="contact-container">
+                        <ul>
+                            <li>07494 235 998</li>
+                            <li>domchaple@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
         <script>
             

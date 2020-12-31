@@ -24,3 +24,16 @@
 	Home SEO gauge:
 		https://icon-library.com/icon/gauge-icon-23.html
 
+    About Programming languages:
+
+        <a href="https://iconscout.com/icons/js" target="_blank">Js Icon</a> by <a href="https://iconscout.com/contributors/vorillaz">Vorillaz</a> on <a href="https://iconscout.com">Iconscout</a>
+        <a href="https://iconscout.com/icons/html" target="_blank">Html Logo Icon</a> by <a href="https://iconscout.com/contributors/jagathish">Jagathish Saravanan</a> on <a href="https://iconscout.com">Iconscout</a>
+        <a href="https://iconscout.com/icons/django" target="_blank">Django Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia">Icon Mafia</a> on <a href="https://iconscout.com">Iconscout</a>
+        <a href="https://iconscout.com/icons/mongodb" target="_blank">Mongodb Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia">Icon Mafia</a> on <a href="https://iconscout.com">Iconscout</a>
+        <a href="https://iconscout.com/icons/mysql" target="_blank">Mysql Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia" target="_blank">Icon Mafia</a>
+        <a href="https://iconscout.com/icons/heroku" target="_blank">Heroku Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia">Icon Mafia</a> on <a href="https://iconscout.com">Iconscout</a>
+        <a href="https://iconscout.com/icons/jasmine" target="_blank">Jasmine Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia">Icon Mafia</a> on <a href="https://iconscout.com">Iconscout</a>
+
+    About Education:
+        https://favpng.com (Code institute logo)
+
