@@ -2,8 +2,9 @@
 :root {
     /**** Colours ****/
     --main-bg-color: #222629;
-    --header-text-color: #61892F;
-    --big-text-color: #FFF;
+    --primary-text-color: #FFF;
+    --secondary-text-color: #61892F;
+    --tertiary-text-color: #363636;
 	--button-bg-color: #86C232;
 	--alternate-bg-color: #474B4F;
     --paragraph-text-color: #6B6E70;
@@ -26,6 +27,10 @@
     background-color: #ccff00;
 }
 
+.container {
+    border-radius: .25rem;
+}
+
 .center {
     display: flex;
     justify-content: center;
@@ -33,16 +38,16 @@
 }
 
 p {
-    color: var(--big-text-color);
+    color: var(--primary-text-color);
 }
 
 a {
-    color: var(--big-text-color);
+    color: var(--primary-text-color);
     font-family: var(--paragraph-text-font);
 }
 
 a:hover {
-    color: var(--big-text-color);
+    color: var(--primary-text-color);
     text-decoration: underline;
 }
 
@@ -60,26 +65,86 @@ hr {
     margin: 0.5rem 0;
 }
 
+html.has-navbar-fixed-top {
+    padding-top: 2.7rem;
+}
+
 .nav {
     height: 44px;
     background-color: var(--alternate-bg-color);
 }
-#nav_logo {
+
+.navbar {
+    min-height: 0;
+}
+.navbar-brand {
+    background-color: var(--alternate-bg-color);
+    min-height: auto;
     height: 44px;
-    padding-left: 16px;
 }
 
-.nav h1 {
+.navbar-item img {
+    /* Override Bulma default css */
+    max-height: none;
+}
+
+#logo_link {
+    display: flex;
+    justify-content: center;
+    margin-left: 33.3%;
+    width: 33.3%;
+}
+
+#logo_link:hover {
+    text-decoration: none;
+}
+
+#nav_logo {
+    height: 44px;
+}
+
+.navbar-brand #logo_link h1 {
     padding-left: 10px;
     padding-top: 5px;
-    color: var(--big-text-color);
+    color: var(--primary-text-color);
     font-family: var(--logo-text-font);
 }
 
-.nav-menu-options {
-    padding-right: 10px;
-    color: var(--big-text-color);
+.navbar-burger {
+/* override bulma default */
+    height: 44px;
+    width: 44px;
+    color: #FFF;
 }
+#navMenuTouch {
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+#navDropdownMenu {
+    height: 100%;
+}
+
+#navDropdownMenu a.navbar-item {
+    border-radius: .25rem;
+    padding: 5px;
+}
+
+#navDropdownMenu .navbar-item {
+    padding: 0.5rem 0rem;
+}
+
+#navDropdownMenu a.navbar-item.is-active {
+    background-color: inherit;
+    color: #000;
+}
+
+#navDropdownMenu a.navbar-item:hover {
+    background-color: var(--alternate-bg-color);
+    color: #FFF;
+    text-decoration: none;
+}
+
 
 /****/
 
@@ -122,7 +187,7 @@ hr {
     width: 100%;
     font-family: var(--paragraph-text-font);
     font-size: 2rem;
-    color: var(--big-text-color) !important;
+    color: var(--primary-text-color) !important;
     text-align: center;
 }
 
@@ -139,12 +204,52 @@ hr {
     }
 }
 
+@media screen and (min-width: 1024px) {
+    .navbar {
+        min-height: 0;
+    }
+
+    #navMenuTouch {
+        background-color: var(--alternate-bg-color);
+    }
+
+    #navDropdownMenu {
+        margin-left: 40%;
+        width: 60%;
+        justify-content: space-between; 
+    }
+
+    #navDropdownMenu a.navbar-item,
+    #navDropdownMenu a.navbar-item.is-active {
+        padding: 0.5rem 0.5rem;
+        color: var(--primary-text-color);
+    }
+
+    #navDropdownMenu a.navbar-item.is-active {
+        font-weight: bold;
+    }
+
+    #navDropdownMenu a.navbar-item:hover {
+        background-color: var(--primary-text-color);
+        color: var(--alternate-bg-color);
+    }
+
+    #logo_link {
+        margin-left: 0%;
+        width: auto;
+    }
+
+    #nav_logo {
+        padding-left: 16px;
+    }
+}
+
 #contact_tab {
     -ms-transform: rotate(-90deg);
     -webkit-transform: rotate(-90deg);
     transform: rotate(-90deg);
     background-color: var(--button-bg-color);
-    color: var(--big-text-color);
+    color: var(--primary-text-color);
     position: fixed;
     top: 50%;
     right: -80px;
@@ -162,6 +267,11 @@ hr {
     /* opacity: 0; */
 }
 
+#contact_tab a:hover {
+    text-decoration: none;
+    color: var(--tertiary-text-color);
+}
+
 section {
     margin-top: 32px;
 }
@@ -169,7 +279,7 @@ section {
 .feature-title {
     font-family: var(--paragraph-text-font);
     font-size: 2rem;
-    color: var(--big-text-color);
+    color: var(--primary-text-color);
 }
 
 .image-container {
@@ -186,11 +296,12 @@ section {
 
 .button {
     background-color: var(--button-bg-color);
-    color: var(--big-text-color);
+    color: var(--primary-text-color);
 }
 
 .button:hover {
-    color: var(--paragraph-text-color);
+    color: var(--tertiary-text-color);
+    text-decoration: none;
 }
 
 .blog-bg {
@@ -213,7 +324,7 @@ section {
 .footer .footer-title {
     text-align: center;
     font-family: var(--header-text-font);
-    color: var(--header-text-color);
+    color: var(--secondary-text-color);
     font-size: 24px;
 }
 

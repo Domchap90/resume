@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="has-navbar-fixed-top">
 {% load static %}
     <head>
         <title>Dominic Chaple Web Developer</title>
@@ -43,24 +43,36 @@
     <body>
         <header>
             
-            <nav class="level nav">
-                <div class="level-left">
-                    <img src="{% static 'images/logo.png' %}" alt="DC logo" id="nav_logo">
-                    <h1 class="level-item logo">WEB DEVELOPMENT</h1>
+            <nav class="navbar is-fixed-top is-mobile" role="navigation" aria-label="main navigation">
+                <!-- <div class="level-left" id="nav_left"> -->
+                <div class="navbar-brand">
+                    <a href="{% url 'home' %}" class="navbar-item" id="logo_link">
+                        <img src="{% static 'images/logo.png' %}" alt="DC logo" id="nav_logo">
+                        <h1 class="logo is-hidden-touch">WEB DEVELOPMENT</h1>
+                    </a>
+                    
+                    <a role="button" class="navbar-burger is-active" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
                 </div>
 
-                <div class="level-right nav-menu-options">
-                    <p class="level-item"><a href="{% url 'about' %}">About</a></p>
-                    <p class="level-item">Blog</p>
-                    <p class="level-item">Services</p>
-                    <p class="level-item">Portfolio</p>
-                    <p class="level-item">Contact</p>
-                </div>
-
-            </nav>
-            
-            <!-- Sidebar navigation -->
-            
+                {% with request.resolver_match.url_name as url_name %}
+                <div class="navbar-menu is-active" id="navMenuTouch">
+                    <div class="navbar-start" id="navDropdownMenu">                    
+                        <a class="navbar-item {% if url_name == 'home' %}is-active{% endif %}" href="{% url 'home' %}">Home</a>
+                        <a class="navbar-item {% if url_name == 'about' %}is-active{% endif %}" href="{% url 'about' %}">About</a>
+                        <a class="navbar-item {% if url_name == 'about' %}is-active{% endif %}" href="{% url 'about' %}">Blog</a>
+                        <a class="navbar-item {% if url_name == 'about' %}is-active{% endif %}" href="{% url 'about' %}">Services</a>
+                        <a class="navbar-item {% if url_name == 'about' %}is-active{% endif %}" href="{% url 'about' %}">Portfolio</a>
+                        <a class="navbar-item {% if url_name == 'about' %}is-active{% endif %}" href="{% url 'about' %}">Contact</a>
+                    </div>
+                    <div class="navbar-end">  
+                    </div>
+                </div> 
+                {% endwith %}
+            </nav>      
             
         </header>
 
