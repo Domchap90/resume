@@ -51,7 +51,7 @@
                         <h1 class="logo is-hidden-touch">WEB DEVELOPMENT</h1>
                     </a>
                     
-                    <a role="button" class="navbar-burger is-active" aria-label="menu" aria-expanded="false">
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" id="burger_button">
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
@@ -59,7 +59,7 @@
                 </div>
 
                 {% with request.resolver_match.url_name as url_name %}
-                <div class="navbar-menu is-active" id="navMenuTouch">
+                <div class="navbar-menu" id="navMenuTouch">
                     <div class="navbar-start" id="navDropdownMenu">                    
                         <a class="navbar-item {% if url_name == 'home' %}is-active{% endif %}" href="{% url 'home' %}">Home</a>
                         <a class="navbar-item {% if url_name == 'about' %}is-active{% endif %}" href="{% url 'about' %}">About</a>
@@ -105,12 +105,7 @@
             </div>
         </footer>
 
-        <script>
-            
-        $(document).ready(function(){
-            
-        });
-        </script>
+        <script src="{% static 'js/base.js' %}"></script>
         
         {% block postloadjs %}
         {% endblock %}
