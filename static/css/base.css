@@ -23,6 +23,14 @@
     background-color: #86C232;
 }
 
+.black-txt {
+    color: #000;
+}
+
+.dark-grey-txt {
+    color: var(--tertiary-text-color);
+}
+
 .neon-yellow-bg {
     background-color: #ccff00;
 }
@@ -37,8 +45,29 @@
     align-items: center;
 }
 
+.top {
+    display: flex;
+    align-items: start;
+}
+
+.bottom {
+    display: flex;
+    align-items: end;
+}
+
+.left {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.right {
+    display: flex;
+    justify-content: flex-end;
+}
+
 p {
     color: var(--primary-text-color);
+    font-size: 16px;
 }
 
 a {
@@ -244,6 +273,9 @@ html.has-navbar-fixed-top {
     }
 }
 
+/********************************************************* Index */
+
+
 #contact_tab {
     -ms-transform: rotate(-90deg);
     -webkit-transform: rotate(-90deg);
@@ -283,6 +315,13 @@ section {
     text-align: center;
 }
 
+.section-title {
+    padding: 16px;
+    font-family: var(--header-text-font);
+    font-size: 32px;
+    text-align: center;
+}
+
 .image-container {
     width: 100%;
 }
@@ -318,6 +357,8 @@ section {
     padding: 0 32px;
 }
 
+/************************************************************** Footer */
+
 .footer {
     background-color: var(--alternate-bg-color);
 }
@@ -348,8 +389,34 @@ section {
     font-weight: bold;
 }
 
+/************************************************************** About Me */
+
 img, .tile {
     border-radius: .25rem !important;
+}
+
+.tile:not(.is-child) {
+    display: flex;
+}
+
+.tile.is-4 {
+    flex: none;
+    width: 33.3%;
+}
+
+
+.tile.is-6 {
+    flex: none;
+    width: 50%;
+}
+
+.mobile-img {
+    width: 337.5px;
+    height: 366px;
+}
+
+.touch-txt {
+    padding: 16px 5% 32px;
 }
 
 .main-tile {
@@ -366,4 +433,55 @@ img, .tile {
 
 #education_tile {
     color: black;
+}
+
+.tile-overlay {
+    position: absolute; 
+    width: 100%;
+    height: 366px; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); 
+}
+
+#profile_desktop_img {
+    min-height: 232px;
+}
+
+#mobile_about {
+    color: var(--primary-text-color);
+    font-family: var(--header-text-font);
+    font-size: 32px;
+}
+
+#img_tile {
+    background-color: var(--alternate-bg-color);
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#education_touch_title {
+    min-height: 130px;
+}
+
+.education-img {
+    max-width: 338px;
+}
+
+@media (min-width: 600px) {
+    .touch-txt {
+        padding: 16px 10% 32px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .touch-txt {
+        padding: 16px 16.5% 32px;
+    }
 }
