@@ -19,6 +19,13 @@
 	https://pixabay.com/illustrations/computer-sketching-working-2271010/	(Image by <a href="https://pixabay.com/users/dizer-1604004/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2271010">Orion Quest</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2271010">Pixabay</a>)
     https://pixabay.com/photos/laptop-human-hands-keyboard-typing-820274/   (Image by <a href="https://pixabay.com/users/fancycrave1-1115284/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=820274">fancycrave1</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=820274">Pixabay</a>)
 
+    Blog:
+        https://pixabay.com/photos/pencils-writing-write-blog-blogger-762555/
+        Image by <a href="https://pixabay.com/users/kaboompics-1013994/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=762555">Karolina Grabowska</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=762555">Pixabay</a> (Blog banner)
+        https://pixabay.com/photos/mark-marker-hand-write-516279/#
+        Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=516279">Gerd Altmann</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=516279">Pixabay</a> (Solving Algorithms blog)
+
+
 # Icons
 
 	Home SEO gauge:
@@ -36,4 +43,6 @@
 
     About Education:
         https://favpng.com (Code institute logo)
+
+
 

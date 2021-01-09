@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="below-nav">
+     <div class="hero blog-banner-bg">
+        <div class="banner-overlay">
+            <div class="container central-container tagline-container">
+                <h1 class="tagline primary-txt">BLOG</h1>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero feature">
+        <div class="container central-container">
+            <h2 class="feature-title mb-5">
+               Get the Latest Web Design Tips & Tricks
+            </h2>
+            <h3 class="white-txt secondary-txt mb-3">This week's blog post:</h3>
+        </div>
+
+        <div class="container central-container center">
+            <div id="featured_blog">
+                <h2 class="feature-title black-txt" id="blog_title">
+                    Solving Algorithms: A Structured Approach to Problem Solving
+                </h2>
+
+                <div class="">
+                    <img src="{% static 'images/blog_solving_algos.jpg' %}" alt="Image of Flow Chart">
+                    <div class="button-container center" id="featured_blog_overlay">
+                        <a class="button" href="">Read</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="hero feature pb-6">
+        <div class="container central-container">
+            <h3 class="white-txt secondary-txt mb-3">Previous posts:</h3>
+
+            <hr>
+            <h4 class="blog-title">Blog Title</h4>
+            <p class="date">01/01/2020</p>
+            <p>
+            (Extract from blog) Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis ...
+            </p>
+            <div class="blog-button-container center right">
+                <a class="button" href="">Read</a>
+            </div>
+            <hr>
+            <h4 class="blog-title">Blog Title 2</h4>
+            <p class="date">08/01/2020</p>
+            <p>
+            (Extract from blog) Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis ...
+            </p>
+            <div class="blog-button-container center right">
+                <a class="button" href="">Read</a>
+            </div>
+            <hr>
+            <h4 class="blog-title">Blog Title 3</h4>
+            <p class="date">15/01/2020</p>
+            <p>
+            (Extract from blog) Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis ...
+            </p>
+            <div class="blog-button-container center right">
+                <a class="button" href="">Read</a>
+            </div>
+            <hr>
+        </div>
+    </section>
+
+    <section class="hero feature pb-6">
+        <div class="container central-container">
+            <h2 class="feature-title mb-5">
+               Sign up to my Mailing List
+            </h2>
+            <h3 class="white-txt secondary-txt mb-3 center center-txt">Receive the latest blog posts directly as soon as they are uploaded.</h3>
+            <form id="blog_form">
+                <input class="input" type="text" placeholder="user@domain.com" id="blog_signup">
+                <div class="blog-button-container center">
+                    <button class="button" type="submit">Sign up</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+{% endblock %}
