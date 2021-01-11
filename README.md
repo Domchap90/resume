@@ -25,7 +25,9 @@
         https://pixabay.com/photos/mark-marker-hand-write-516279/#
         Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=516279">Gerd Altmann</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=516279">Pixabay</a> (Solving Algorithms blog)
 
-
+    Services:
+        Photo by rawpixel.com form PxHere   https://pxhere.com/en/photo/1567383 (Services Banner)
+        https://www.iconfinder.com/icons/2639855/maintenance_icon (Maintenance icon)
 # Icons
 
 	Home SEO gauge:

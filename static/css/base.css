@@ -39,12 +39,21 @@
 .neon-yellow-bg {
     background-color: #ccff00 !important;
 }
+
+.grey-bg {
+    background-color: var(--alternate-bg-color);
+}
+
 .primary-txt {
     font-family: var(--header-text-font) !important;
 }
 
 .secondary-txt {
     font-family: var(--paragraph-text-font) !important;
+}
+
+.tertiary-txt {
+    font-family: var(--logo-text-font) !important;
 }
 
 .center-txt {
@@ -574,4 +583,71 @@ img, .tile {
 
 #blog_signup {
     text-align: center;
+}
+
+/******************************************** Services */
+
+.services-banner-bg {
+    background: url('/static/images/services_banner.jpg');
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    height: 216px;
+}
+
+.service-item {
+
+}
+
+.service-icon {
+    height: 100px;
+    min-height: 100px;
+    width: 100px;
+    min-width: 100px;
+    margin: 0 auto 20px;
+    border-radius: 0.25rem;
+    font-size: 64px;
+}
+
+.service-icon i {
+    font-size: 64px;
+    color: var(--primary-text-color);
+}
+
+.service-icon i.fas.fa-database {
+    color: #000;
+}
+
+.service-text {
+    margin-bottom: 20px;
+    padding: 10px;
+    color: var(--primary-text-color);
+}
+
+@media (min-width: 769px) {
+    .service-icon {
+        height: 150px;
+        width: 150px;
+    }
+
+}
+
+@media (min-width: 1024px) {
+    .service-item {
+        display: flex;
+        align-items: center;
+    }
+
+    .service-icon {
+    
+    }
+    
+    .service-text {
+        width: calc(66vw - 150px);
+        padding-left: 50px;
+    }
+
+    .service-text:not(:first-child) {
+        margin-top: 20px;
+    }
 }

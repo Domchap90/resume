@@ -9,3 +9,8 @@ def index(request):
 def about(request):
 
     return render(request, 'home/about.html')
+
+
+def services(request):
+
+    return render(request, 'home/services.html')
