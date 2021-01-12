@@ -14,3 +14,7 @@ def about(request):
 def services(request):
 
     return render(request, 'home/services.html')
+
+def portfolio(request):
+
+    return render(request, 'home/portfolio.html')

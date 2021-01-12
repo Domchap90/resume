@@ -257,7 +257,7 @@ html.has-navbar-fixed-top {
     width: 100%;
     font-family: var(--paragraph-text-font);
     font-size: 2rem;
-    color: var(--primary-text-color) !important;
+    color: var(--primary-text-color);
     text-align: center;
 }
 
@@ -649,5 +649,55 @@ img, .tile {
 
     .service-text:not(:first-child) {
         margin-top: 20px;
+    }
+}
+
+/**************************************************** Portfolio */
+
+.banner-bg {
+    height: 216px;
+}
+
+#portfolio_section {
+    padding: 100px 0;
+}
+
+.card {
+    margin-bottom: 50px;
+}
+
+.content {
+    font-family: var(--paragraph-text-font);
+}
+
+.portfolio-title {
+    margin-bottom: 10px;
+    font-family: var(--header-text-font);
+    font-size: 24px;
+    color: var(--tertiary-text-color);
+}
+
+.website-link {
+    padding-bottom: 5px;
+}
+
+.portfolio-link {
+    color: #0000EE;
+}
+
+.portfolio-link:hover {
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+.portfolio-icon {
+    margin-right: 10px;
+    font-size: larger;
+    color: black;
+}
+
+@media (min-width: 769px) {
+    .portfolio-icon {
+        font-size: large;
     }
 }

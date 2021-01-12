@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="below-nav">
+    <div class="hero white-bg banner-bg">
+        <div class="container central-container tagline-container">
+            <h1 class="tagline black-txt">Portfolio</h1>
+        </div>
+    </div>
+
+
+    <section class="hero feature" id="portfolio_section">
+        <div class="container central-container">
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                        <img src="{% static 'images/resume_portfolio_dbj_screenshot.png' %}" alt="Image of page from Dom's Burger Joint site">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                        
+                        <div class="media-content">
+                            <p class="portfolio-title is-4">Dom's Burger Joint</p>
+                            <p class="website-link is-6"><i class="fas fa-globe portfolio-icon"></i><a href="https://doms-burger-joint.herokuapp.com/" class="portfolio-link">https://doms-burger-joint.herokuapp.com/</a></p>
+                            <p class="is-6"><i class="fab fa-github portfolio-icon"></i><a href="https://github.com/Domchap90/Doms_burger_joint" class="portfolio-link">https://github.com/Domchap90/Doms_burger_joint</a></p>
+                        </div>
+
+                    </div>
+            
+                    <div class="content">
+                        A full stack website for a typical online food delivery service. This
+                        includes a database of the food items which is hosted by sqlite. Orders
+                        can be created from the database & other CRUD operations are available 
+                        on the food items. 
+                        <br><br>
+                        The site features a fully secure checkout (Stripe payments API), that utilises webhooks
+                        and email confirmation for the user's successful orders. It also verifies the customer's
+                        postcode is valid by checking the distance from store to the customer's address via
+                        google maps distance matrix API.
+                        <br><br>
+                        The app also gives the user an option to sign up as a member and benefit from a reward scheme,
+                        consisting of adding a free burger to the user's order after every 5th order made. 
+                        The login is configured by the django allauth app. 
+                    </div>
+                </div>
+            </div>
+
+             <div class="card">
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                        <img src="{% static 'images/resume_portfolio_recomedia_screenshot.png' %}" alt="Image of page from Recomovie site">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                        
+                        <div class="media-content">
+                            <p class="portfolio-title is-4">Recomovie</p>
+                            <p class="website-link is-6"><i class="fas fa-globe portfolio-icon"></i><a href="https://recomedia.herokuapp.com/" class="portfolio-link">https://recomedia.herokuapp.com/</a></p>
+                            <p class="is-6"><i class="fab fa-github portfolio-icon"></i><a href="https://github.com/Domchap90/recoMedia" class="portfolio-link">https://github.com/Domchap90/recoMedia</a></p>
+                        </div>
+
+                    </div>
+            
+                    <div class="content">
+                        A data-centric dynamic app for users to build profiles and share
+                        their favourite movies through ratings and reviews given.
+                        User profiles are visible and if logged in can be fully edited
+                        through CRUD operations on reviews. 
+                        <br><br>
+                        Basic Login - plain text password storage. Data stored in mongoDB
+                        (Atlas) and queries performed via Python Flask control. Connects
+                        to OMDB API for film validation.
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+             <div class="card">
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                        <img src="{% static 'images/resume_portfolio_ttt_screenshot.png' %}" alt="Image of page from Tic Tac Toe site">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                        
+                        <div class="media-content">
+                            <p class="portfolio-title is-4">Tic Tac Toe</p>
+                            <p class="website-link is-6"><i class="fas fa-globe portfolio-icon"></i><a href="https://domchap90.github.io/tictactoe/" class="portfolio-link">https://domchap90.github.io/tictactoe/</a></p>
+                            <p class="is-6"><i class="fab fa-github portfolio-icon"></i><a href="https://github.com/Domchap90/tictactoe" class="portfolio-link">https://github.com/Domchap90/tictactoe</a></p>
+                        </div>
+
+                    </div>
+            
+                    <div class="content">
+                        A simple 1 player game of tic tac toe. Allows the user to chose
+                        their marker & whether they go first or not. The game has a retro
+                        design and a toggleable menu interface. 
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+             <div class="card">
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                        <img src="{% static 'images/resume_portfolio_pt_screenshot.png' %}" alt="Image of page from Personal Training site">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                        
+                        <div class="media-content">
+                            <p class="portfolio-title is-4">Personal Training Website</p>
+                            <p class="website-link is-6"><i class="fas fa-globe portfolio-icon"></i><a href="https://domchap90.github.io/personal-training/" class="portfolio-link">https://domchap90.github.io/personal-training/</a></p>
+                            <p class="is-6"><i class="fab fa-github portfolio-icon"></i><a href="https://github.com/Domchap90/personal-training" class="portfolio-link">https://github.com/Domchap90/personal-training</a></p>
+                        </div>
+
+                    </div>
+            
+                    <div class="content">
+                        Front end of a personal training service web page. Contains the main
+                        features of a home and contact page. With an elegantly designed UI
+                        catering to a range of users. The website features testimonials, price
+                        menus and call to action forms.
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+            
+</div>
+{% endblock %}
