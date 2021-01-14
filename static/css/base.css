@@ -267,13 +267,6 @@ html.has-navbar-fixed-top {
     }
 }
 
-@media (min-width: 1000px) {
-    .central-container {
-        width: 66%;
-        max-width: 950px;
-    }
-}
-
 @media screen and (min-width: 1024px) {
     .navbar {
         min-height: 0;
@@ -311,6 +304,11 @@ html.has-navbar-fixed-top {
 
     #nav_logo {
         padding-left: 16px;
+    }
+
+    .central-container {
+        width: 66%;
+        max-width: 950px;
     }
 }
 
@@ -520,7 +518,7 @@ img, .tile {
     }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1024px) {
     .touch-txt {
         padding: 16px 16.5% 32px;
     }
@@ -699,5 +697,85 @@ img, .tile {
 @media (min-width: 769px) {
     .portfolio-icon {
         font-size: large;
+    }
+}
+
+/*********************************************** Contact */
+
+#contact_text_container {
+    /* text-align: center; */
+}
+
+.contact-text {
+    max-width: 400px;
+}
+
+#contact_form_container{
+    display: block;
+}
+
+#contact_form {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+#contact_form label {
+    display: block;
+    max-width: 400px;
+    text-align: left;
+}
+
+#contact_form input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#contact_form .textarea {
+    display: inline-flex;
+    max-width: 400px;
+    min-width: 0;
+    margin-bottom: 50px;
+}
+
+@media (min-width: 457px) {
+    .contact-text {
+        width: 400px;
+        margin-left: calc((100% - 400px)/2);
+    }
+
+    #contact_form label {
+        width: 400px;
+        margin-left: calc((100% - 400px)/2);
+    }
+}
+
+@media (min-width: 769px) {
+    #contact_form {
+        text-align: left;
+    }
+
+    #contact_form p {
+        text-align: center;
+    }
+
+    #contact_form .textarea {
+        max-width: 100%;
+        width: 500px;
+    }
+
+    #contact_form p:nth-child(4),
+    #contact_form .button {
+        text-align: left;
+        margin-left: calc((100% - 400px)/2);
+    }
+
+    #contact_form p:nth-child(4) label {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    #contact_form .textarea {
+        width: 550px;
     }
 }

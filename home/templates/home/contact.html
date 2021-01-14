@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+<div class="below-nav">
+    <div class="hero bright-green-bg banner-bg">
+        <div class="container central-container tagline-container">
+            <h1 class="tagline black-txt">Contact</h1>
+        </div>
+    </div>
+
+
+    <section class="hero feature">
+        <div class="container central-container">
+            <div id="contact_text_container">
+                <h2 class="feature-title">Message Me</h2>
+                <p class="contact-text mt-3 mb-6">
+                    If you want a website for your business or you were thinking of a project with which you would like to collaborate. 
+                    Simply leave a message here & I'll respond within 24 hours.
+                </p>
+            </div>
+            <div id="contact_form_container">
+                <form id="contact_form">
+                    {{ form.as_p }}
+                    <button class="button" type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+            
+</div>
+
+<!-- <script>
+    $(document).ready(function () {
+        $('label').hide();
+        $('#contact_form_container p input').addClass('input');
+        $('#contact_form_container p textarea').addClass('textarea');
+    });
+
+</script> -->
+
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script src="{% static 'home/js/contact.js' %}"></script>
+{% endblock %}

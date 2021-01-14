@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from .forms import ContactForm
+
 
 def index(request):
 
@@ -15,6 +17,17 @@ def services(request):
 
     return render(request, 'home/services.html')
 
+
 def portfolio(request):
 
     return render(request, 'home/portfolio.html')
+
+
+def contact(request):
+    form = ContactForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'home/contact.html', context)
