@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+<div class="below-nav">
+    <div class="hero bright-green-bg banner-bg">
+        <div class="container central-container tagline-container">
+            <h1 class="tagline black-txt">Content Management</h1>
+        </div>
+    </div>
+
+    <section class="hero feature">
+        <div class="container central-container">
+            <div id="blog_content">
+                <h2 class="feature-title">Blog content</h2>
+                <p class="blog-content-item center mt-3 mb-6">Upload new blog file</p>
+                <form action="{% url 'cms' %}" method="POST" class="blog-content-item" enctype="multipart/form-data" id="blog_content_form">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% if field.name == "blog_file" %}
+                            <div class="file">
+                                <label class="file-label">
+                                    <input class="file-input" type="file" name="{{ field.name }}">
+                                    <span class="file-cta">
+                                        <span class="file-icon">
+                                            <i class="fas fa-upload"></i>
+                                        </span>
+                                        <span class="file-label">
+                                            Choose a Blog
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                        {% elif field.name == "blog_title" %}
+                            <label class="">Title</label>
+                            <input class="input" type="text" name="{{ field.name }}" id="blog_title">
+                        {% else %}
+                            <label class="">Date</label>
+                            <input class="input" type="date" name="{{ field.name }}" id="{{ field.name }}">
+                        {% endif %}
+
+                        {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong class="help is-danger">{{ error }}</strong>
+                        </div>
+                        {% endfor %}
+                        
+                    {% endfor %}
+                   
+                    <button class="button" type="submit" name="submit" value="upload_blog">Upload</button>
+                </form>
+                <h2 class="feature-title mt-6">Edit Previous Blogs</h2>
+                {% if blogs %}
+                <table class="table is-fullwidth mt-3">
+                    <thead>
+                        <tr>
+                            <th id="date_col">Date</th>
+                            <th class="is-hidden-mobile">Title</th>
+                            <th>File</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for blog in blogs %}
+                        <tr id="blog_{{ forloop.counter }}">
+                            <td>
+                                {{ blog.blog_post_date}}
+                            </td>
+                            <td class="is-hidden-mobile">
+                                {{ blog.blog_title}}
+                            </td>
+                            <td class="file-name-display">{{ blog.blog_file }}</td>
+                            <td><i class="far fa-edit"></i></td>
+                            <td onclick="deleteBlog()"><i class="far fa-trash-alt"></i></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="blog-content-item center mt-3 mb-6">No blogs have been added yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+            
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script src="{% static 'cms/js/cms.js' %}" type="module"></script>
+{% endblock %}
