@@ -2,6 +2,8 @@ $(document).ready(function() {
     formatFileName();
     setupModal();
     $( ".delete-blog" ).click(deleteBlogModal);
+    setupFileUpload("upload_new_blog");
+    // setupFileUpload("edit_previous_blog");
 });
 
 // document.getElementsByClassName("delete-blog").style.backgroundColor = "red";
@@ -55,4 +57,17 @@ function deleteBlog(titleOfBlogToDelete) {
     $.post(`delete_blog/`, data).done( function() {
         location.reload();
     });
+}
+
+function setupFileUpload(fileId) {
+    const fileInput = $('#'+fileId+' input[type=file]');
+    fileInput.change(() => {
+        if (fileInput.prop('files').length > 0) {
+            const fileVal = fileInput.val();
+            const startIndex = fileVal.lastIndexOf("\\") + 1;
+            const fileNameLen = fileVal.length - startIndex;
+            const formattedFile = fileVal.substr(startIndex, fileNameLen);
+            $('#'+fileId+' .file-name').text(formattedFile);
+        }
+    })   
 }

@@ -22,7 +22,7 @@
                     {% csrf_token %}
                     {% for field in form %}
                         {% if field.name == "blog_file" %}
-                            <div class="file">
+                            <div class="file has-name" id="upload_new_blog">
                                 <label class="file-label">
                                     <input class="file-input" type="file" name="{{ field.name }}">
                                     <span class="file-cta">
@@ -32,6 +32,9 @@
                                         <span class="file-label">
                                             Choose a Blog
                                         </span>
+                                    </span>
+                                    <span class="file-name">
+                                        file.txt
                                     </span>
                                 </label>
                             </div>
@@ -73,6 +76,50 @@
                             <td class="file-name-display">{{ blog.blog_file }}</td>
                             <td><i class="far fa-edit"></i></td>
                             <td id="deleteblog_{{ forloop.counter }}" class="delete-blog"><i class="far fa-trash-alt"></i></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form action="{% url 'edit_blog' %}" method="POST" class="blog-content-item" enctype="multipart/form-data"
+                                    id="blog_edit_form">
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                    {% if field.name == "blog_file" %}
+                                    <div class="file has-name" id="edit_previous_blog">
+                                        <label class="file-label">
+                                            <input class="file-input" type="file" name="{{ field.name }}">
+                                            <span class="file-cta">
+                                                <span class="file-icon">
+                                                    <i class="fas fa-upload"></i>
+                                                </span>
+                                                <span class="file-label">
+                                                    Choose a Blog
+                                                </span>
+                                                <span class="file-name">
+                                                    file.txt
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    {% elif field.name == "blog_title" %}
+                                    <label class="">Title</label>
+                                    <input class="input" type="text" name="{{ field.name }}" id="blog_title">
+                                    {% else %}
+                                    <label class="">Date</label>
+                                    <input class="input" type="date" name="{{ field.name }}" id="{{ field.name }}">
+                                    {% endif %}
+                                
+                                    {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong class="help is-danger">{{ error }}</strong>
+                                    </div>
+                                    {% endfor %}
+                                
+                                    {% endfor %}
+                                
+                                    <button class="button" type="submit" name="submit" value="upload_blog">Upload</button>
+                                </form>
+                                
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
