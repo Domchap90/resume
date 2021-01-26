@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django_simple_bulma',
     'home',
     'blog',
     'cms',
@@ -129,3 +130,30 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+STATICFILES_FINDERS = [
+  # First add the two default Finders, since this will overwrite the default.
+  'django.contrib.staticfiles.finders.FileSystemFinder',
+  'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+
+  # Now add our custom SimpleBulma one.
+  'django_simple_bulma.finders.SimpleBulmaFinder',
+]
+
+# Custom settings for django-simple-bulma
+BULMA_SETTINGS = {
+    "extensions": [
+        "bulma-collapsible",
+        "bulma-calendar",
+    ],
+    "variables": {
+        "primary": "#000000",
+        "size-1": "6rem",
+    },
+    "alt_variables": {
+        "primary": "#fff",
+        "scheme-main": "#000",
+    },
+    "output_style": "compressed",
+    "fontawesome_token": "e761a01be3",
+}

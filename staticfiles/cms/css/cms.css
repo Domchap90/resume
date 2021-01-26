@@ -1,0 +1,53 @@
+.modal-content {
+    height: 150px;
+    background-color: var(--primary-text-color);
+}
+
+.modal-text {
+    width: 100%;
+}
+
+/************************************* CMS - Blog section */
+
+#blog_content_form > * {
+    margin-bottom: 10px;
+}
+
+.blog-content-item {
+    margin: 0 auto;
+    width: 300px;
+}
+
+#blog_content_form label {
+    color: var(--primary-text-color);
+}
+
+#blog_content p, #blog_content table {
+    color: var(--primary-text-color);
+}
+
+#blog_content table {
+    color: var(--main-bg-color);
+}
+
+#blog_content table th {
+    background-color: var(--alternate-bg-color);
+    color: var(--primary-text-color);
+}
+
+table th#date_col {
+    max-width: 120px;
+}
+
+#blog_content table i {
+    font-size: large;
+}
+
+@media (min-width: 1024px) {
+    #blog_content table i {
+        font-size: x-large;
+    }
+}
+
+/*************************************************** Subscriber section */
+

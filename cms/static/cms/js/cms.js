@@ -1,32 +1,12 @@
-// import bulmaCalendar from '/bulma-calendar/dist/js/bulma-calendar.min';
-
-$(document).ready( function() {
-    $('#blog_content_form p:first-child').addClass('file');
-    $('#blog_content_form p:first-child label').addClass('file-label');
-    $('#blog_content_form p:first-child input').addClass('file-input');
+$(document).ready(function() {
     formatFileName();
-    var calendars = bulmaCalendar.attach('[type="date"]', options);
-
-// Loop on each calendar initialized
-for(var i = 0; i < calendars.length; i++) {
-	// Add listener to date:selected event
-	calendars[i].on('select', date => {
-		console.log(date);
-	});
-}
-
-// To access to bulmaCalendar instance of an element
-var element = document.querySelector('#blog_post_date');
-if (element) {
-	// bulmaCalendar instance is available as element.bulmaCalendar
-	element.bulmaCalendar.on('select', function(datepicker) {
-		console.log(datepicker.data.value());
-	});
-}
+    setupModal();
+    $( ".delete-blog" ).click(deleteBlogModal);
 });
 
+// document.getElementsByClassName("delete-blog").style.backgroundColor = "red";
+
 function formatFileName() {
-    console.log("formatFileName function entered.")
     $(".file-name-display").each(function() {
         let fileStr = $(this).html();
         let startIndex = fileStr.lastIndexOf("/")+1;
@@ -39,29 +19,40 @@ function formatFileName() {
                 formattedName = fileStr.substr(startIndex, 10);
             if (fileNameLen > 10) formattedName += ' ...';
         } else if ($(window).width () < 1024) {
-            console.log(`fileStr = ${fileStr}, fileNameLen = ${fileNameLen}`)
             if (fileNameLen < 20) formattedName = fileStr.substr(startIndex, fileNameLen);
             else
                 formattedName = fileStr.substr(startIndex, 21);
             if (fileNameLen > 20) formattedName += ' ...';
-            console.log(`formattedName = ${formattedName}`)
         } else {
             formattedName = fileStr.substr(startIndex);
         }
-        console.log(`formattedName is ${formattedName}`)
+        
         $(this).html(formattedName);
     });
 }
 
-function deleteBlog() {
-    const blogRow = $(this).parent().id();
-    console.log(`blogRow = ${blogRow}`)
-    $.ajax({
-        type: 'POST',
-        url: `delete_blog/`,
-        data: {'blog_title': title},
-        dataType: 'json',
-        success: function(response) {
-            
-        }
+function setupModal() {
+    $('.modal-close, .modal-cancel').click(() => $('.modal').removeClass('is-active'));
+
+}
+
+function deleteBlogModal() {
+    console.log('deleteBlog accessed.')
+    let prevSib = $(this).prev();
+    while(!prevSib.hasClass('blog-title')) {
+        prevSib = prevSib.prev();
+    }
+    
+    let title = prevSib.text();
+    $('.insert-title').html(title);
+
+    $('.modal').addClass('is-active ');
+    $(".modal-confirm").click(() => deleteBlog(title));
+}
+
+function deleteBlog(titleOfBlogToDelete) {
+    data = {'csrfmiddlewaretoken': csrfToken, 'blog_title': titleOfBlogToDelete};
+    $.post(`delete_blog/`, data).done( function() {
+        location.reload();
     });
+}

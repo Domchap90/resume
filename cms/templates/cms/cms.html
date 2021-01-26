@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cms/css/cms.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="below-nav">
@@ -65,15 +68,11 @@
                     <tbody>
                     {% for blog in blogs %}
                         <tr id="blog_{{ forloop.counter }}">
-                            <td>
-                                {{ blog.blog_post_date}}
-                            </td>
-                            <td class="is-hidden-mobile">
-                                {{ blog.blog_title}}
-                            </td>
+                            <td>{{ blog.blog_post_date }}</td>
+                            <td class="blog-title is-hidden-mobile">{{ blog.blog_title }}</td>
                             <td class="file-name-display">{{ blog.blog_file }}</td>
                             <td><i class="far fa-edit"></i></td>
-                            <td onclick="deleteBlog()"><i class="far fa-trash-alt"></i></td>
+                            <td id="deleteblog_{{ forloop.counter }}" class="delete-blog"><i class="far fa-trash-alt"></i></td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -84,6 +83,18 @@
             </div>
         </div>
     </section>
+
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content center">
+            <p class="modal-text">Are you sure you want to delete the blog titled "<span class="insert-title"></span>"?</p>
+            <div class="modal-button-container">
+                <button class="button is-danger modal-confirm">Delete Blog</button>
+                <button class="button modal-cancel">Keep Blog</button>
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
             
 </div>
 
@@ -91,5 +102,8 @@
 
 {% block postloadjs %}
     {{ block.super }}
-    <script src="{% static 'cms/js/cms.js' %}" type="module"></script>
+    <script>
+        const csrfToken = "{{ csrf_token }}";
+    </script>
+    <script src="{% static 'cms/js/cms.js' %}" type="text/javascript"></script>
 {% endblock %}

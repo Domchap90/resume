@@ -1,0 +1,56 @@
+.blog-banner-bg {
+    background: url('/static/images/blog_banner.jpg');
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    height: 216px;
+}
+
+#featured_blog {
+    position: relative;
+    background-color: #FFF;
+    max-width: 600px;
+}
+
+.featured-blog-bg {
+    background: url('/static/images/blog_solving_algos.jpg');
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: contain; 
+}
+
+#featured_blog_overlay {
+    position: absolute;
+    top: 80%;
+    left: 10%;
+}
+
+.blog-button-container {
+    height: 50px;
+}
+
+.blog-title {
+    color: var(--primary-text-color);
+    font-family: var(--header-text-font);
+}
+
+.date {
+    font-style: italic;
+}
+
+#blog_form {
+    display: block;
+    text-align: center;
+}
+
+#blog_form > * {
+    margin-bottom: 10px;
+}
+
+#blog_form .blog-button-container {
+    width: 100%;
+}
+
+#blog_signup {
+    text-align: center;
+}

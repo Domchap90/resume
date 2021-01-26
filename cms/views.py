@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.urls import reverse
 from datetime import datetime
 
@@ -8,11 +8,9 @@ from .forms import BlogForm
 
 
 def cms(request):
-    print("cms view accessed.")
     # Load blogs for CRUD operations
-    print(f"blog submit val = {dict(request.POST.lists())}")
+
     if request.POST:
-        print(f"request.POST = {request.POST}")
         blog_form = blog_content(request)
     else:
         blog_form = BlogForm()
@@ -27,14 +25,11 @@ def cms(request):
 
 
 def blog_content(request):
-    print("blog content accessed.")
     form = BlogForm(request.POST, request.FILES)
     date_entered = request.POST.get('blog_post_date')
 
     # if date field empty defaults to current date
     date = datetime.now().date() if date_entered == '' else date_entered
-
-    print(f"date = {date}")
     title = request.POST.get('blog_title')
     bfile = request.FILES.get('blog_file', None)
 
@@ -46,9 +41,16 @@ def blog_content(request):
             blog_post_date=date)
         blogpost.save()
 
-    # blogs = Blog.objects.order_by('-blog_post_date')
-    
     return form
 
+
+def delete_blog(request):
+    print("delete_blog entered")
+    title = request.POST.get('blog_title')
+    print(f"title = {title}")
+    Blog.objects.get(blog_title=title).delete()
+
+    return HttpResponse(status=200)
+    # return HttpResponse('cms')
 
 # def email_subscribers(request):
