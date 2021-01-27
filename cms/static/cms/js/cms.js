@@ -1,14 +1,16 @@
 $(document).ready(function() {
-    formatFileName();
+    formatFileNameInTable();
     setupModal();
     $( ".delete-blog" ).click(deleteBlogModal);
+    $('tbody tr form .file').each((i, el) => setupFileUpload($(el).attr('id')));
     setupFileUpload("upload_new_blog");
+    
     // setupFileUpload("edit_previous_blog");
 });
 
 // document.getElementsByClassName("delete-blog").style.backgroundColor = "red";
 
-function formatFileName() {
+function formatFileNameInTable() {
     $(".file-name-display").each(function() {
         let fileStr = $(this).html();
         let startIndex = fileStr.lastIndexOf("/")+1;
@@ -39,7 +41,6 @@ function setupModal() {
 }
 
 function deleteBlogModal() {
-    console.log('deleteBlog accessed.')
     let prevSib = $(this).prev();
     while(!prevSib.hasClass('blog-title')) {
         prevSib = prevSib.prev();
@@ -60,14 +61,26 @@ function deleteBlog(titleOfBlogToDelete) {
 }
 
 function setupFileUpload(fileId) {
-    const fileInput = $('#'+fileId+' input[type=file]');
-    fileInput.change(() => {
-        if (fileInput.prop('files').length > 0) {
-            const fileVal = fileInput.val();
-            const startIndex = fileVal.lastIndexOf("\\") + 1;
-            const fileNameLen = fileVal.length - startIndex;
-            const formattedFile = fileVal.substr(startIndex, fileNameLen);
-            $('#'+fileId+' .file-name').text(formattedFile);
-        }
-    })   
+    const fileInputElement = $('#'+fileId+' input[type=file]');
+    if (fileId.includes("edit_previous_blog")){
+        formatFileNameInUpload(fileId, fileInputElement);
+    }
+    fileInputElement.change(() => {
+        formatFileNameInUpload(fileId, fileInputElement);
+    });   
+}
+
+function formatFileNameInUpload(fileId, fileInput) {
+    let fileVal = fileInput.val();   
+    let startIndex;
+    if (fileInput.prop('files').length > 0) {
+        startIndex = fileVal.lastIndexOf("\\") + 1;
+        
+    } else if (fileId.includes('edit_previous_blog')) {
+        fileVal = $(`#${fileId} .file-name`).html();
+        startIndex = fileVal.lastIndexOf("/") + 1;
+    }    
+    const fileNameLen = fileVal.length - startIndex;
+    const formattedFile = fileVal.substr(startIndex, fileNameLen);
+    $('#'+fileId+' .file-name').text(formattedFile);
 }

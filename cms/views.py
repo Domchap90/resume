@@ -44,6 +44,14 @@ def blog_content(request):
     return form
 
 
+def edit_blog(request):
+    title = request.POST.get('blog_title') 
+    date =  get_form_date(request.POST.get('blog_date'))
+    file = request.FILES.get('blog_file')
+
+    return redirect('cms')
+
+
 def delete_blog(request):
     print("delete_blog entered")
     title = request.POST.get('blog_title')
@@ -52,5 +60,10 @@ def delete_blog(request):
 
     return HttpResponse(status=200)
     # return HttpResponse('cms')
+
+
+def get_form_date(entry):
+    return datetime.now().date() if entry == '' else entry
+
 
 # def email_subscribers(request):

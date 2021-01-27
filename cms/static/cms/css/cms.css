@@ -33,6 +33,11 @@
     color: var(--primary-text-color);
 }
 
+.file.has-name .file-name {
+    background-color: var(--main-bg-color);
+    color: var(--primary-text-color);
+}
+
 #blog_content p, #blog_content table {
     color: var(--primary-text-color);
 }
