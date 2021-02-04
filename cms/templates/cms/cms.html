@@ -20,7 +20,7 @@
                 <p class="blog-content-item center mt-3 mb-6">Upload new blog file</p>
                 <form action="{% url 'cms' %}" method="POST" class="blog-content-item" enctype="multipart/form-data" id="blog_content_form">
                     {% csrf_token %}
-                    {% for field in form %}
+                    {% for field in upload_form %}
                         {% if field.name == "blog_file" %}
                             <div class="file has-name" id="upload_new_blog">
                                 <label class="file-label">
@@ -41,7 +41,7 @@
                         {% elif field.name == "blog_title" %}
                             <label class="">Title</label>
                             <input class="input" type="text" name="{{ field.name }}" id="blog_title">
-                        {% else %}
+                        {% elif field.name == "blog_post_date" %}
                             <label class="">Date</label>
                             <input class="input" type="date" name="{{ field.name }}" id="{{ field.name }}">
                         {% endif %}
@@ -69,48 +69,54 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for blog in blogs %}
+                    {% for form in edit_forms %}
                         <tr id="blog_{{ forloop.counter }}">
-                            <td>{{ blog.blog_post_date }}</td>
-                            <td class="blog-title is-hidden-mobile">{{ blog.blog_title }}</td>
-                            <td class="file-name-display">{{ blog.blog_file }}</td>
-                            <td><i class="far fa-edit"></i></td>
+                            <td>{{ form.blog_post_date.value }}</td>
+                            <td class="blog-title is-hidden-mobile">{{ form.blog_title.value }}</td>
+                            <td class="file-name-display">{{ form.blog_file.value }}</td>
+                            <td class="edit-btn"><i class="far fa-edit"></i></td>
                             <td id="deleteblog_{{ forloop.counter }}" class="delete-blog"><i class="far fa-trash-alt"></i></td>
                         </tr>
-                        <tr>
-                            <td>
+
+                    
+                        <tr class="edit-row" id="edit_row_{{ form.id.value }}">
+                            <td colspan="12">
                                 <form action="{% url 'edit_blog' %}" method="POST" class="blog-content-item" enctype="multipart/form-data"
-                                    id="blog_edit_form_{{ blog.id }}">
+                                    id="blog_edit_form_{{ form.id.value }}">
                                     {% csrf_token %}
-                                    <div class="file has-name" id="edit_previous_blog_{{ blog.id }}">
+                                            
+                                    {% for field in form %}
+                                    
+                                    {% if field.name == "blog_file" %}
+                                    <div class="file has-name" id="edit_previous_blog_{{ form.id.value }}">
                                         <label class="file-label">
-                                            <input class="file-input" type="file" name="{{ field.name }}" value="{{ blog.blog_file }}">
+                                            <input class="file-input" type="file" name="{{ field.name }}"/>
                                             <span class="file-cta">
                                                 <span class="file-icon">
                                                     <i class="fas fa-upload"></i>
                                                 </span>
                                                 <span class="file-label">Update Blog</span>
                                             </span>
-                                            <span class="file-name">{{ blog.blog_file }}</span>
+                                            <span class="file-name">{{ field.value }}</span>
                                         </label>
                                     </div>
-                                    
+                                    {% elif field.name == "blog_title" %}
                                     <label class="">Title</label>
-                                    <input class="input" type="text" name="blog_title" value="{{ blog.blog_title }}">
-                                    
+                                    <input class="input" type="text" name="blog_title" value="{{ field.value }}" />
+                                    {% elif field.name == "id" %}
+                                    <input type="hidden" value="{{ field.value }}" name="{{ field.name }}"> 
+                                    {% else %}
                                     <label class="">Date</label>
-                                    <input class="input" type="date" name="blog_post_date">
-                                    
+                                    <input class="input" type="date" name="blog_post_date" value="{{ field.value|date:'Y-m-d' }}" />
+                                    {% endif %}
                                 
-                                    <!-- {% for error in field.errors %}
-                                    <div class="alert alert-danger">
-                                        <strong class="help is-danger">{{ error }}</strong>
-                                    </div>
+                                        {% for error in field.errors %}
+                                        <div class="alert alert-danger">
+                                            <strong class="help is-danger">{{ error }}</strong>
+                                        </div>
+                                        {% endfor %}                               
                                     {% endfor %}
-                                 -->
-                                    
-                                
-                                    <button class="button" type="submit" name="submit" value="upload_blog">Upload</button>
+                                    <button class="button" type="submit" name="submit" value="upload_blog">Save Changes</button>
                                 </form>
                                 
                             </td>

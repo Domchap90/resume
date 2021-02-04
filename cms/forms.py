@@ -18,6 +18,7 @@ class BlogForm(forms.Form):
     blog_title = forms.CharField(max_length=50)
     blog_post_date = forms.DateField(
         input_formats=settings.DATE_INPUT_FORMATS, required=False)
+    id = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     def clean_blog_file(self):
         blog_file = self.cleaned_data['blog_file']

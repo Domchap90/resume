@@ -1,11 +1,24 @@
 $(document).ready(function() {
+    $('.edit-row').hide();
+    $('.edit-btn').click(function(){
+    /* Creates accordian effect where only one row's details can be viewed at
+    a time */
+        let editRowId = $(this).parent().next().attr('id');
+        console.log(`editRowId = ${editRowId}`)
+        // Allows the single viewed row to be closed so all rows are hidden
+        $('.edit-row:not(#'+editRowId+')').hide();
+        $(`#${editRowId}`).toggle();
+    });
+
     formatFileNameInTable();
     setupModal();
     $( ".delete-blog" ).click(deleteBlogModal);
     $('tbody tr form .file').each((i, el) => setupFileUpload($(el).attr('id')));
     setupFileUpload("upload_new_blog");
+    const blog47 = $('#blog_edit_form_47 input[type="date"]');
+    $('#blog_edit_form_47 .datetimepicker-dummy-input.is-datetimepicker-range').val('01/21/2008');
     
-    // setupFileUpload("edit_previous_blog");
+    // bulmaCalendar.attach(blog47, {startDate: new Date('10/24/2019')});
 });
 
 // document.getElementsByClassName("delete-blog").style.backgroundColor = "red";
