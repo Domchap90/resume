@@ -2,8 +2,9 @@ from django import forms
 from django.conf import settings
 from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext_lazy as ugtl
+from phonenumber_field.formfields import PhoneNumberField
 
-from .models import Blog
+from .models import Blog, Subscriber
 
 
 class BlogForm(forms.Form):
@@ -51,3 +52,26 @@ Files must be '.txt'."))
 
         if blog_title in title_list:
             raise forms.ValidationError("This title already exists.")
+
+
+class SubscriberForm(forms.Form):
+    class Meta():
+        model = Subscriber
+
+        fields = ('name', 'email', 'number')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        labels = {
+            'name': 'Name',
+            'email': 'Email Address',
+            'number': 'Contact Number',
+        }
+
+        placeholders = {
+            'name': 'First name will do',
+            'mobile_number': 'So we can contact you',
+            'email': 'To send your confirmation',
+        }
+

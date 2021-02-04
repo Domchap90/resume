@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'home',
     'blog',
     'cms',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
