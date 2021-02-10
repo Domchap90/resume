@@ -33,6 +33,10 @@ form label {
     color: var(--primary-text-color);
 }
 
+form input::placeholder {
+    /* color: #000; */
+}
+
 .file.has-name .file-name {
     background-color: var(--main-bg-color);
     color: var(--primary-text-color);
@@ -46,21 +50,29 @@ form label {
     color: var(--main-bg-color);
 }
 
-#blog_content table th {
+table th {
     background-color: var(--alternate-bg-color);
-    color: var(--primary-text-color);
+    color: var(--primary-text-color) !important;
 }
 
 table th#date_col {
     max-width: 120px;
 }
 
-#blog_content table i {
+table th#number_col {
+    min-width: 150px;
+}
+
+table i {
     font-size: large;
 }
 
+table label {
+    color: black;
+}
+
 @media (min-width: 1024px) {
-    #blog_content table i {
+    table i {
         font-size: x-large;
     }
 }

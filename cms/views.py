@@ -13,13 +13,15 @@ import os
 
 def cms(request):
     # Load blogs for CRUD operations
+
+    blog_upload_form = BlogForm()
+    add_subscriber_form = SubscriberForm()
+
     if request.POST.get('submit') == "upload_blog":
         blog_upload_form = blog_content(request)
     elif request.POST.get('submit') == "add_subscriber":
         add_subscriber_form = add_subscriber(request)
-    else:
-        blog_upload_form = BlogForm()
-        add_subscriber_form = SubscriberForm()
+
 
     blogs = Blog.objects.order_by('-blog_post_date')
     edit_blog_forms = []
@@ -41,6 +43,15 @@ def cms(request):
 
     subscribers = Subscriber.objects.order_by('name')
     edit_sub_forms = []
+    for sub in subscribers:
+
+        data = {
+            'name': sub.name,
+            'email': sub.email,
+            'number': sub.number
+        }
+
+        edit_sub_forms.append(SubscriberForm(data))
 
     context = {
         'blogs': blogs,
@@ -108,6 +119,17 @@ def add_subscriber(request):
         subscriber.save()
 
     return form
+
+
+def edit_subscriber(request):
+    email = request.POST.get('email')
+    subscriber = Subscriber.objects.get(email=email)
+    subscriber.name = request.POST.get('name')
+    subscriber.email = request.POST.get('email')
+    subscriber.number = request.POST.get('number')
+    subscriber.save()
+    print(f"name = {subscriber.name}, email = {subscriber.email}, number = {subscriber.number}")
+    return redirect('cms')
 
 
 def get_form_date(entry):

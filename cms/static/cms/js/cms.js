@@ -18,6 +18,14 @@ $(document).ready(function() {
     const blog47 = $('#blog_edit_form_47 input[type="date"]');
     $('#blog_edit_form_47 .datetimepicker-dummy-input.is-datetimepicker-range').val('01/21/2008');
     
+    $('.sub_content_form label').each( function() {
+    const label = $(this).text();
+    $(this).text(label.substr(0, label.length-1));
+    });
+   
+    $('.sub_content_form p input').addClass('input');
+
+    $('.errorlist li').addClass('help is-danger');
     // bulmaCalendar.attach(blog47, {startDate: new Date('10/24/2019')});
 });
 

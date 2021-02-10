@@ -66,14 +66,14 @@ class SubscriberForm(forms.ModelForm):
         }
 
         placeholders = {
-            'name': 'First name will do',
-            'number': 'So we can contact you',
-            'email': 'To send your confirmation',
+            'name': "User's name",
+            'number': 'If user wishes to be called (Optional)',
+            'email': 'Allows user to be emailed',
         }
 
         for field in self.fields:
             self.fields[field].label = labels[field]
-            self.fields[field].widget.attrs['placeholder'] = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = f'{placeholders[field]}'
             if field != "number":
                 self.fields[field].required = True
                 self.fields[field].label += '*'

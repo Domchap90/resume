@@ -136,15 +136,16 @@
             <div id="subscriber_content">
                 <h2 class="feature-title">Subscriber content</h2>
                 <p class="content-item center mt-3 mb-6">Add new subscriber</p>
-                <form action="{% url 'cms' %}" method="POST" class="content-item" id="subscriber_content_form">
+                <form action="{% url 'cms' %}" method="POST" class="content-item sub_content_form" >
                     {% csrf_token %}
-                    {% for field in add_sub_form %}
+                    {{ add_sub_form.as_p }}
+                    <!-- {% for field in add_sub_form %}
                         {% if field.name == "email" %}
                             <label>{{ field.label }}</label>
-                            <input class="input" type="email" name="{{ field.name }}" id="{{ field.name }}">
+                            <input class="input" type="email" name="{{ field.name }}" id="{{ field.name }}" placeholder="{{ field.placeholder }}">
                         {% else %}
                             <label>{{ field.label }}</label>
-                            <input class="input" type="text" name="{{ field.name }}" id="{{ field.name }}">
+                            <input class="input" type="text" name="{{ field.name }}" id="{{ field.name }}" placeholder="{{ field.placeholder }}">
                         {% endif %}
 
                         {% for error in field.errors %}
@@ -154,7 +155,7 @@
                         {% endfor %}
                         
                     {% endfor %}
-                   
+                    -->
                     <button class="button" type="submit" name="submit" value="add_subscriber">Add Subscriber</button>
                 </form>
                 <h2 class="feature-title mt-6">Edit Email Subscribers</h2>
@@ -164,7 +165,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Number</th>
+                            <th class="is-hidden-mobile" id="number_col">Number</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -173,8 +174,11 @@
                     {% for form in edit_sub_forms %}
                         <tr>
                             <td>{{ form.name.value }}</td>
-                            <td class="unique-field">{{ form.email.value }}</td>
-                            <td>{{ form.number.value }}</td>
+                            <td class="unique-field is-hidden-tablet">{{ form.email.value|truncatechars:10 }}</td>
+                            <td class="unique-field is-hidden-mobile is-visible-tablet is-hidden-desktop">{{ form.email.value|truncatechars:20 }}</td>
+                            <td class="unique-field is-hidden-touch">{{ form.email.value }}</td>
+                            
+                            <td class="is-hidden-mobile">{{ form.number.value }}</td>
                             <td class="edit-btn"><i class="far fa-edit"></i></td>
                             <td class="delete-item"><i class="far fa-trash-alt"></i></td>
                         </tr>
@@ -182,7 +186,7 @@
                     
                         <tr class="edit-row" id="edit_subrow_">
                             <td colspan="12">
-                                <form action="{% url 'edit_subscriber' %}" method="POST" class="content-item">
+                                <form action="{% url 'edit_subscriber' %}" method="POST" class="content-item sub_content_form">
                                     {% csrf_token %}
 
                                    
@@ -190,10 +194,10 @@
                                     
                                         {% if field.name == "email" %}
                                             <label>{{ field.label }}</label>
-                                            <input class="input" type="email" name="{{ field.name }}" id="{{ field.name }}" value="{{ field.value }}">                                            
+                                            <input class="input" type="email" name="{{ field.name }}" id="{{ field.name }}" value="{{ field.value }}" placeholder="{{ field.placeholder }}">                                            
                                         {% else %}
                                             <label>{{ field.label }}</label>
-                                            <input class="input" type="text" name="{{ field.name }}" id="{{ field.name }}" value="{{ field.value }}">
+                                            <input class="input" type="text" name="{{ field.name }}" id="{{ field.name }}" value="{{ field.value }}" placeholder="{{ field.placeholder }}">
                                         {% endif %}
                                 
                                         {% for error in field.errors %}
