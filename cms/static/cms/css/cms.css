@@ -20,16 +20,16 @@
 
 /************************************* CMS - Blog section */
 
-#blog_content_form > * {
+form > * {
     margin-bottom: 10px;
 }
 
-.blog-content-item {
+.content-item {
     margin: 0 auto;
     width: 300px;
 }
 
-#blog_content_form label {
+form label {
     color: var(--primary-text-color);
 }
 

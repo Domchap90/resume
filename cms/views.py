@@ -5,18 +5,21 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
 from datetime import datetime
 
-from .models import Blog
-from .forms import BlogForm
+from .models import Blog, Subscriber
+from .forms import BlogForm, SubscriberForm
 
 import os
 
 
 def cms(request):
     # Load blogs for CRUD operations
-    if request.POST:
+    if request.POST.get('submit') == "upload_blog":
         blog_upload_form = blog_content(request)
+    elif request.POST.get('submit') == "add_subscriber":
+        add_subscriber_form = add_subscriber(request)
     else:
         blog_upload_form = BlogForm()
+        add_subscriber_form = SubscriberForm()
 
     blogs = Blog.objects.order_by('-blog_post_date')
     edit_blog_forms = []
@@ -36,10 +39,16 @@ def cms(request):
 
         edit_blog_forms.append(BlogForm(data, file_data))
 
+    subscribers = Subscriber.objects.order_by('name')
+    edit_sub_forms = []
+
     context = {
         'blogs': blogs,
-        'upload_form': blog_upload_form,
-        'edit_forms': edit_blog_forms
+        'blog_upload_form': blog_upload_form,
+        'edit_blog_forms': edit_blog_forms,
+        'subscribers': subscribers,
+        'add_sub_form': add_subscriber_form,
+        'edit_sub_forms': edit_sub_forms,
     }
 
     return render(request, 'cms/cms.html', context)
@@ -83,7 +92,22 @@ def delete_blog(request):
     Blog.objects.get(blog_title=title).delete()
 
     return HttpResponse(status=200)
-    # return HttpResponse('cms')
+
+
+def add_subscriber(request):
+    form = SubscriberForm(request.POST)
+    name = request.POST.get('name')
+    email = request.POST.get('email')
+    number = request.POST.get('number')
+
+    if form.is_valid():
+        subscriber = Subscriber(
+            name=name,
+            email=email,
+            number=number)
+        subscriber.save()
+
+    return form
 
 
 def get_form_date(entry):

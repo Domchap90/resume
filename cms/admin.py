@@ -11,7 +11,7 @@ class BlogAdmin(admin.ModelAdmin):
 
 class SubscriberAdmin(admin.ModelAdmin):
 
-    list_display = ('name', 'email', 'number')
+    list_display = ('id', 'name', 'email', 'number')
 
     ordering = ('name', 'email')
 

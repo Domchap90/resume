@@ -11,10 +11,6 @@ class BlogForm(forms.Form):
     blog_file = forms.FileField(
         label='Upload File',
         help_text='max. 42 megabytes',
-        # validators=[
-        #     FileTypeValidator(
-        #         allowed_types=['text/plain'], allowed_extensions=['.txt'])
-        #     ]
     )
     blog_title = forms.CharField(max_length=50)
     blog_post_date = forms.DateField(
@@ -54,7 +50,7 @@ Files must be '.txt'."))
             raise forms.ValidationError("This title already exists.")
 
 
-class SubscriberForm(forms.Form):
+class SubscriberForm(forms.ModelForm):
     class Meta():
         model = Subscriber
 
@@ -71,7 +67,13 @@ class SubscriberForm(forms.Form):
 
         placeholders = {
             'name': 'First name will do',
-            'mobile_number': 'So we can contact you',
+            'number': 'So we can contact you',
             'email': 'To send your confirmation',
         }
 
+        for field in self.fields:
+            self.fields[field].label = labels[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholders[field]
+            if field != "number":
+                self.fields[field].required = True
+                self.fields[field].label += '*'
