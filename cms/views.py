@@ -43,10 +43,9 @@ def cms(request):
 
     subscribers = Subscriber.objects.order_by('name')
     edit_sub_forms = []
-    sub_ids = []
+
     for sub in subscribers:
-        sub_ids.append(sub.id)
-        print(f"sub id = {sub.id}")
+
         data = {
             'id': sub.id,
             'name': sub.name,
@@ -61,7 +60,6 @@ def cms(request):
         'blog_upload_form': blog_upload_form,
         'edit_blog_forms': edit_blog_forms,
         'subscribers': subscribers,
-        'sub_ids': sub_ids,
         'add_sub_form': add_subscriber_form,
         'edit_sub_forms': edit_sub_forms,
     }
@@ -89,22 +87,26 @@ def blog_content(request):
 
 def edit_blog(request):
     id = request.POST.get('id')
-    print(f"EDIT_BLOG: id = {id}")
     blog = Blog.objects.get(id=id)
     blog.blog_file = request.FILES.get('blog_file')
-    # file not showing up
+
     blog.blog_title = request.POST.get('blog_title')
     blog.blog_post_date = get_form_date(request.POST.get('blog_post_date'))
     blog.save()
-    print(f"file = {blog.blog_file}, title = {blog.blog_title}, date = {blog.blog_post_date}")
+
     return redirect('cms')
 
 
 def delete_blog(request):
-    print("delete_blog entered")
-    title = request.POST.get('blog_title')
-    print(f"title = {title}")
+    title = request.POST.get('unique_property')
     Blog.objects.get(blog_title=title).delete()
+
+    return HttpResponse(status=200)
+
+
+def delete_subscriber(request):
+    email = request.POST.get('unique_property')
+    Subscriber.objects.get(email=email).delete()
 
     return HttpResponse(status=200)
 
@@ -126,19 +128,16 @@ def add_subscriber(request):
 
 
 def edit_subscriber(request):
-    email = request.POST.get('email')
-    subscriber = Subscriber.objects.get(email=email)
+    sub_id = request.POST.get('id')
+    subscriber = Subscriber.objects.get(id=sub_id)
     subscriber.name = request.POST.get('name')
     subscriber.email = request.POST.get('email')
     subscriber.number = request.POST.get('number')
     subscriber.save()
-    print(f"name = {subscriber.name}, email = {subscriber.email}, number = {subscriber.number}")
+
     return redirect('cms')
 
 
 def get_form_date(entry):
     # if date field empty defaults to current date
     return datetime.now().date() if entry == '' else entry
-
-
-# def email_subscribers(request):

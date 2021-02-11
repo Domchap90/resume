@@ -12,7 +12,7 @@ $(document).ready(function() {
 
     formatFileNameInTable();
     setupModal();
-    $( ".delete-blog" ).click(deleteBlogModal);
+    $( ".delete-blog, .delete-sub" ).click(deleteItemModal);
     $('tbody tr form .file').each((i, el) => setupFileUpload($(el).attr('id')));
     setupFileUpload("upload_new_blog");
     const blog47 = $('#blog_edit_form_47 input[type="date"]');
@@ -61,22 +61,34 @@ function setupModal() {
 
 }
 
-function deleteBlogModal() {
+function deleteItemModal() {
+    let clickedId = $(this).attr('id');
+    let delBlog = false;
+
+    if (clickedId.indexOf('sub') === -1)
+        delBlog = true;
+    
     let prevSib = $(this).prev();
-    while(!prevSib.hasClass('blog-title')) {
+    while(!prevSib.hasClass('unique-field')) {
         prevSib = prevSib.prev();
     }
     
-    let title = prevSib.text();
-    $('.insert-title').html(title);
+    let deleteObject = `subscriber with email address:<br>${prevSib.text()}`;
+    if (delBlog)
+        deleteObject = `blog entitled ${prevSib.text()}`;
 
-    $('.modal').addClass('is-active ');
-    $(".modal-confirm").click(() => deleteBlog(title));
+    $('.insert-del-item').html(deleteObject);
+
+    $('.modal').addClass('is-active');
+    if (delBlog)
+        $(".modal-confirm").click(() => deleteItem(prevSib.text(), "delete_blog/"));
+    else
+        $(".modal-confirm").click(() => deleteItem(prevSib.text(), "delete_subscriber/"));
 }
 
-function deleteBlog(titleOfBlogToDelete) {
-    data = {'csrfmiddlewaretoken': csrfToken, 'blog_title': titleOfBlogToDelete};
-    $.post(`delete_blog/`, data).done( function() {
+function deleteItem(uniqueProperty, relativeUrl) {
+    data = {'csrfmiddlewaretoken': csrfToken, 'unique_property': uniqueProperty};
+    $.post(relativeUrl, data).done( function() {
         location.reload();
     });
 }

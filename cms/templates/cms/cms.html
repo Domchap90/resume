@@ -70,12 +70,12 @@
                     </thead>
                     <tbody>
                     {% for form in edit_blog_forms %}
-                        <tr id="blog_{{ forloop.counter }}">
+                        <tr id="blog_{{ form.id.value }}">
                             <td>{{ form.blog_post_date.value }}</td>
-                            <td class="blog-title is-hidden-mobile">{{ form.blog_title.value }}</td>
+                            <td class="unique-field is-hidden-mobile">{{ form.blog_title.value }}</td>
                             <td class="file-name-display">{{ form.blog_file.value }}</td>
                             <td class="edit-btn"><i class="far fa-edit"></i></td>
-                            <td id="deleteblog_{{ forloop.counter }}" class="delete-blog"><i class="far fa-trash-alt"></i></td>
+                            <td id="deleteblog_{{ form.id.value }}" class="delete-blog"><i class="far fa-trash-alt"></i></td>
                         </tr>
 
                     
@@ -173,14 +173,14 @@
                     <tbody>
                     {% for form in edit_sub_forms %}
                         <tr>
-                            <td>{{ form.name.value }}</td>
-                            <td class="unique-field is-hidden-tablet">{{ form.email.value|truncatechars:10 }}</td>
-                            <td class="unique-field is-hidden-mobile is-visible-tablet is-hidden-desktop">{{ form.email.value|truncatechars:20 }}</td>
+                            <td class="sub-name">{{ form.name.value }}</td>
+                            <td class="is-hidden-tablet">{{ form.email.value|truncatechars:10 }}</td>
+                            <td class="is-hidden-mobile is-visible-tablet is-hidden-desktop">{{ form.email.value|truncatechars:20 }}</td>
                             <td class="unique-field is-hidden-touch">{{ form.email.value }}</td>
                             
                             <td class="is-hidden-mobile">{{ form.number.value }}</td>
                             <td class="edit-btn"><i class="far fa-edit"></i></td>
-                            <td class="delete-item"><i class="far fa-trash-alt"></i></td>
+                            <td id="deletesub_{{ form.id.value }}" class="delete-sub"><i class="far fa-trash-alt"></i></td>
                         </tr>
 
                     
@@ -225,10 +225,10 @@
     <div class="modal">
         <div class="modal-background"></div>
         <div class="modal-content center">
-            <p class="modal-text">Are you sure you want to delete the blog titled "<span class="insert-title"></span>"?</p>
+            <p class="modal-text">Are you sure you want to delete the <span class="insert-del-item"></span>?</p>
             <div class="modal-button-container">
-                <button class="button is-danger modal-confirm">Delete Blog</button>
-                <button class="button modal-cancel">Keep Blog</button>
+                <button class="button is-danger modal-confirm">Delete <span class="del-item"></span></button>
+                <button class="button modal-cancel">Keep <span class="del-item"></span></button>
             </div>
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
