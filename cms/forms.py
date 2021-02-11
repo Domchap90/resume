@@ -50,30 +50,37 @@ Files must be '.txt'."))
             raise forms.ValidationError("This title already exists.")
 
 
-class SubscriberForm(forms.ModelForm):
-    class Meta():
-        model = Subscriber
-
-        fields = ('name', 'email', 'number')
+class SubscriberForm(forms.Form):
+    id = forms.CharField(widget=forms.HiddenInput(), required=False)
+    name = forms.CharField(max_length=50, label='Name')
+    email = forms.EmailField(
+        max_length=80, label='Email Address')
+    number = PhoneNumberField(label='Contact Number', required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        labels = {
-            'name': 'Name',
-            'email': 'Email Address',
-            'number': 'Contact Number',
-        }
-
         placeholders = {
+            'id': '',
             'name': "User's name",
-            'number': 'If user wishes to be called (Optional)',
-            'email': 'Allows user to be emailed',
+            'number': "If user wishes to be called (Optional)",
+            'email': "Allows user to be emailed",
         }
 
         for field in self.fields:
-            self.fields[field].label = labels[field]
-            self.fields[field].widget.attrs['placeholder'] = f'{placeholders[field]}'
-            if field != "number":
-                self.fields[field].required = True
-                self.fields[field].label += '*'
+            self.fields[field].widget.attrs.update(
+                {'placeholder': placeholders[field]})
+    #     labels = {
+    #         'name': 'Name',
+    #         'email': 'Email Address',
+    #         'number': 'Contact Number',
+    #     }
+
+       
+
+    #     for field in self.fields:
+    #         self.fields[field].label = labels[field]
+    #         self.fields[field].widget.attrs['placeholder'] = f'{placeholders[field]}'
+    #         if field != "number":
+    #             self.fields[field].required = True
+    #             self.fields[field].label += '*'

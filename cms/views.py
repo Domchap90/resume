@@ -43,9 +43,12 @@ def cms(request):
 
     subscribers = Subscriber.objects.order_by('name')
     edit_sub_forms = []
+    sub_ids = []
     for sub in subscribers:
-
+        sub_ids.append(sub.id)
+        print(f"sub id = {sub.id}")
         data = {
+            'id': sub.id,
             'name': sub.name,
             'email': sub.email,
             'number': sub.number
@@ -58,6 +61,7 @@ def cms(request):
         'blog_upload_form': blog_upload_form,
         'edit_blog_forms': edit_blog_forms,
         'subscribers': subscribers,
+        'sub_ids': sub_ids,
         'add_sub_form': add_subscriber_form,
         'edit_sub_forms': edit_sub_forms,
     }

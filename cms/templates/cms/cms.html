@@ -136,7 +136,7 @@
             <div id="subscriber_content">
                 <h2 class="feature-title">Subscriber content</h2>
                 <p class="content-item center mt-3 mb-6">Add new subscriber</p>
-                <form action="{% url 'cms' %}" method="POST" class="content-item sub_content_form" >
+                <form action="{% url 'cms' %}" method="POST" class="content-item sub_content_form" id="add_sub_form">
                     {% csrf_token %}
                     {{ add_sub_form.as_p }}
                     <!-- {% for field in add_sub_form %}
@@ -184,17 +184,17 @@
                         </tr>
 
                     
-                        <tr class="edit-row" id="edit_subrow_">
+                        <tr class="edit-row" id="edit_subrow_{{ form.id.value }}">
                             <td colspan="12">
                                 <form action="{% url 'edit_subscriber' %}" method="POST" class="content-item sub_content_form">
                                     {% csrf_token %}
-
-                                   
                                     {% for field in form %}
-                                    
+                                        
                                         {% if field.name == "email" %}
                                             <label>{{ field.label }}</label>
-                                            <input class="input" type="email" name="{{ field.name }}" id="{{ field.name }}" value="{{ field.value }}" placeholder="{{ field.placeholder }}">                                            
+                                            <input class="input" type="email" name="{{ field.name }}" id="{{ field.name }}" value="{{ field.value }}" placeholder="{{ field.placeholder }}">  
+                                        {% elif field.name == "id" %}
+                                            <input type="hidden" value="{{ field.value }}" name="{{ field.name }}"> 
                                         {% else %}
                                             <label>{{ field.label }}</label>
                                             <input class="input" type="text" name="{{ field.name }}" id="{{ field.name }}" value="{{ field.value }}" placeholder="{{ field.placeholder }}">
