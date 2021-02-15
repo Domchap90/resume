@@ -4,7 +4,7 @@ from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext_lazy as ugtl
 from phonenumber_field.formfields import PhoneNumberField
 
-from .models import Blog, Subscriber
+from .models import Blog
 
 
 class BlogForm(forms.Form):
