@@ -1,7 +1,8 @@
 from django.conf import settings
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse
 from datetime import datetime
 
@@ -11,17 +12,16 @@ from .forms import BlogForm, SubscriberForm
 import os
 
 
+@staff_member_required
 def cms(request):
     # Load blogs for CRUD operations
-
     blog_upload_form = BlogForm()
     add_subscriber_form = SubscriberForm()
 
     if request.POST.get('submit') == "upload_blog":
-        blog_upload_form = blog_content(request)
+        blog_upload_form = add_blog(request)
     elif request.POST.get('submit') == "add_subscriber":
         add_subscriber_form = add_subscriber(request)
-
 
     blogs = Blog.objects.order_by('-blog_post_date')
     edit_blog_forms = []
@@ -67,7 +67,10 @@ def cms(request):
     return render(request, 'cms/cms.html', context)
 
 
-def blog_content(request):
+@staff_member_required
+def add_blog(request):
+    if not request.user.is_superuser:
+        return HttpResponseRedirect(reverse('home'))
     form = BlogForm(request.POST, request.FILES)
     date = get_form_date(request.POST.get('blog_post_date'))
     print(f"date = {date}")
@@ -85,6 +88,7 @@ def blog_content(request):
     return form
 
 
+@staff_member_required
 def edit_blog(request):
     id = request.POST.get('id')
     blog = Blog.objects.get(id=id)
@@ -97,6 +101,7 @@ def edit_blog(request):
     return redirect('cms')
 
 
+@staff_member_required
 def delete_blog(request):
     title = request.POST.get('unique_property')
     Blog.objects.get(blog_title=title).delete()
@@ -104,6 +109,7 @@ def delete_blog(request):
     return HttpResponse(status=200)
 
 
+@staff_member_required
 def delete_subscriber(request):
     email = request.POST.get('unique_property')
     Subscriber.objects.get(email=email).delete()
@@ -111,6 +117,7 @@ def delete_subscriber(request):
     return HttpResponse(status=200)
 
 
+@staff_member_required
 def add_subscriber(request):
     form = SubscriberForm(request.POST)
     name = request.POST.get('name')
@@ -127,6 +134,7 @@ def add_subscriber(request):
     return form
 
 
+@staff_member_required
 def edit_subscriber(request):
     sub_id = request.POST.get('id')
     subscriber = Subscriber.objects.get(id=sub_id)
