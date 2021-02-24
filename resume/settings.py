@@ -27,6 +27,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_simple_bulma',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'home',
     'blog',
     'cms',
@@ -50,6 +53,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'templates', 'allauth'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -65,6 +69,7 @@ TEMPLATES = [
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 SITE_ID = 1
@@ -103,7 +108,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-MAX_UPLOAD_SIZE = 20971.52
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/cms/'
+
+MAX_FILE_UPLOAD_SIZE = 102400
+MAX_IMG_UPLOAD_SIZE = 1024000
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

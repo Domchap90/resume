@@ -1,0 +1,51 @@
+{% extends "../base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cms/css/cms.css' %}">
+{% endblock %}
+
+{% block outercontent %}
+
+
+<div class="below-nav">
+    <div class="container central-container">
+        {% block innercontent %}
+        {% endblock %}
+    </div>
+</div>
+
+{% endblock %}
+    {% block body %}
+
+    {% if messages %}
+    <div>
+      <strong>Messages:</strong>
+      <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <div>
+      <strong>Menu:</strong>
+      <ul>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+        {% else %}
+        <li><a href="{% url 'account_login' %}">Sign In</a></li>
+        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+        {% endif %}
+      </ul>
+    </div>
+        {% block content %}
+        {% endblock %}
+
+    {% endblock %}
+    {% block extra_body %}
+    {% endblock %}
+  </body>
+</html>

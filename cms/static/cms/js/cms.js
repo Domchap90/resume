@@ -1,10 +1,10 @@
 $(document).ready(function() {
+    $('.modal').removeClass('is-active')
     $('.edit-row').hide();
     $('.edit-btn').click(function(){
-    /* Creates accordian effect where only one row's details can be viewed at
-    a time */
+        /* Creates accordian effect where only one row's details can be viewed at
+        a time */
         let editRowId = $(this).parent().next().attr('id');
-        console.log(`editRowId = ${editRowId}`)
         // Allows the single viewed row to be closed so all rows are hidden
         $('.edit-row:not(#'+editRowId+')').hide();
         $(`#${editRowId}`).toggle();
@@ -14,7 +14,8 @@ $(document).ready(function() {
     setupModal();
     $( ".delete-blog, .delete-sub" ).click(deleteItemModal);
     $('tbody tr form .file').each((i, el) => setupFileUpload($(el).attr('id')));
-    setupFileUpload("upload_new_blog");
+    setupFileUpload("add_blogfile");
+    setupFileUpload("add_blogimg");
     const blog47 = $('#blog_edit_form_47 input[type="date"]');
     $('#blog_edit_form_47 .datetimepicker-dummy-input.is-datetimepicker-range').val('01/21/2008');
     
@@ -74,23 +75,19 @@ function deleteItemModal() {
     }
     
     let deleteObject = `subscriber with email address:<br>${prevSib.text()}`;
-    if (delBlog)
+    if (delBlog) 
         deleteObject = `blog entitled ${prevSib.text()}`;
-
     $('.insert-del-item').html(deleteObject);
 
     $('.modal').addClass('is-active');
-    if (delBlog)
-        $(".modal-confirm").click(() => deleteItem(prevSib.text(), "delete_blog/"));
-    else
-        $(".modal-confirm").click(() => deleteItem(prevSib.text(), "delete_subscriber/"));
-}
-
-function deleteItem(uniqueProperty, relativeUrl) {
-    data = {'csrfmiddlewaretoken': csrfToken, 'unique_property': uniqueProperty};
-    $.post(relativeUrl, data).done( function() {
-        location.reload();
-    });
+    if (delBlog) {
+        $("#deleteitem_form").attr('method', 'POST');
+        $("#deleteitem_form").attr('action', "/cms/delete_blog/"+encodeURIComponent(prevSib.text()));
+    }
+    else {
+        $("#deleteitem_form").attr('method', 'POST');
+        $("#deleteitem_form").attr('action', "/cms/delete_subscriber/"+prevSib.text());
+    }
 }
 
 function setupFileUpload(fileId) {

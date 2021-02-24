@@ -1,12 +1,5 @@
 from django.contrib import admin
-from .models import Blog, Subscriber
-
-
-class BlogAdmin(admin.ModelAdmin):
-
-    list_display = ('blog_post_date', 'id', 'blog_title', 'blog_file')
-
-    ordering = ('-blog_post_date', 'blog_title')
+from .models import Subscriber
 
 
 class SubscriberAdmin(admin.ModelAdmin):
@@ -16,6 +9,4 @@ class SubscriberAdmin(admin.ModelAdmin):
     ordering = ('name', 'email')
 
 
-admin.site.register(Blog, BlogAdmin)
 admin.site.register(Subscriber, SubscriberAdmin)
-

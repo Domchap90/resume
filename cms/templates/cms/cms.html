@@ -21,8 +21,9 @@
                 <form action="{% url 'cms' %}" method="POST" class="content-item" enctype="multipart/form-data" id="blog_content_form">
                     {% csrf_token %}
                     {% for field in blog_upload_form %}
-                        {% if field.name == "blog_file" %}
-                            <div class="file has-name" id="upload_new_blog">
+                        {% if field.name == "file" or field.name == "image" %}
+                            <div class="file has-name {% if field.name == 'image' %}is-boxed mb-5{% endif %}" 
+                                id="{% if field.name == 'file' %}add_blogfile{% else %}add_blogimg{% endif %}">
                                 <label class="file-label">
                                     <input class="file-input" type="file" name="{{ field.name }}">
                                     <span class="file-cta">
@@ -30,20 +31,31 @@
                                             <i class="fas fa-upload"></i>
                                         </span>
                                         <span class="file-label">
-                                            Choose a Blog
+                                            Chose
+                                            {% if field.name == "file" %}
+                                                a Blog
+                                            {% else %}
+                                                an Image for Blog
+                                            {% endif %}
                                         </span>
                                     </span>
                                     <span class="file-name">
-                                        file.txt
+                                        {% if field.name == "file" %}
+                                            file.pdf
+                                        {% else %}
+                                            image.png
+                                        {% endif %}
                                     </span>
                                 </label>
                             </div>
-                        {% elif field.name == "blog_title" %}
-                            <label class="">Title</label>
-                            <input class="input" type="text" name="{{ field.name }}" id="blog_title">
-                        {% elif field.name == "blog_post_date" %}
-                            <label class="">Date</label>
-                            <input class="input" type="date" name="{{ field.name }}" id="{{ field.name }}">
+                        {% elif field.name == "title" %}
+                            <label>Title</label>
+                            <input class="input" type="text" name="{{ field.name }}" id="title">
+                        {% elif field.name == "post_date" %}
+                            <label>Date</label>
+                            <input class="input mb-5" type="date" name="{{ field.name }}" id="{{ field.name }}">
+                        {% else %}
+                            <input type="hidden" name="{{ field.name }}" id="{{ field.name }}" value="{{ field.value }}">
                         {% endif %}
 
                         {% for error in field.errors %}
@@ -69,45 +81,57 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for form in edit_blog_forms %}
-                        <tr id="blog_{{ form.id.value }}">
-                            <td>{{ form.blog_post_date.value }}</td>
-                            <td class="unique-field is-hidden-mobile">{{ form.blog_title.value }}</td>
-                            <td class="file-name-display">{{ form.blog_file.value }}</td>
-                            <td class="edit-btn"><i class="far fa-edit"></i></td>
-                            <td id="deleteblog_{{ form.id.value }}" class="delete-blog"><i class="far fa-trash-alt"></i></td>
-                        </tr>
+                    {% for id, form in edit_blog_forms.items %}
 
-                    
-                        <tr class="edit-row" id="edit_row_{{ form.id.value }}">
+                        {% for blog in blogs %}
+                            {% if blog.id == id %}
+                            <tr id="blog_{{ blog.id }}">
+                                <td>{{ blog.post_date }}</td>
+                                <td class="unique-field is-hidden-mobile">{{ blog.title }}</td>
+                                <td class="file-name-display">{{ blog.file }}</td>
+                                <td class="edit-btn"><i class="far fa-edit"></i></td>
+                                <td id="deleteblog_{{ blog.id }}" class="delete-blog"><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}             
+                        <tr class="edit-row" id="edit_row_{{ id }}">
                             <td colspan="12">
-                                <form action="{% url 'edit_blog' %}" method="POST" class="content-item" enctype="multipart/form-data"
-                                    id="blog_edit_form_{{ form.id.value }}">
+                                <form action="{% url 'cms' %}" method="POST" class="content-item" enctype="multipart/form-data"
+                                    id="blog_edit_form_{{ id }}">
                                     {% csrf_token %}
                                             
                                     {% for field in form %}
                                     
-                                    {% if field.name == "blog_file" %}
-                                    <div class="file has-name" id="edit_previous_blog_{{ form.id.value }}">
+                                    {% if field.name == "file" or field.name == "image" %}
+                                    <div class="file has-name {% if field.name == 'image' %}is-boxed mb-5{% endif %}"
+                                    id="{% if field.name == 'file' %}edit_blogfile_{{ id }}{% else %}edit_blogimg_{{ id }}{% endif %}">
                                         <label class="file-label">
                                             <input class="file-input" type="file" name="{{ field.name }}"/>
                                             <span class="file-cta">
                                                 <span class="file-icon">
                                                     <i class="fas fa-upload"></i>
                                                 </span>
-                                                <span class="file-label">Update Blog</span>
+                                                <span class="file-label">
+                                                    Update
+                                                    {% if field.name == "file" %}
+                                                        Blog
+                                                    {% else %}
+                                                        Image 
+                                                    {% endif %}
+                                                    
+                                                </span>
                                             </span>
                                             <span class="file-name">{{ field.value }}</span>
                                         </label>
                                     </div>
-                                    {% elif field.name == "blog_title" %}
+                                    {% elif field.name == "title" %}
                                     <label class="">Title</label>
-                                    <input class="input" type="text" name="blog_title" value="{{ field.value }}" />
-                                    {% elif field.name == "id" %}
+                                    <input class="input" type="text" name="title" value="{{ field.value }}" />
+                                    {% elif field.name == "id" or field.name == "edit" %}
                                     <input type="hidden" value="{{ field.value }}" name="{{ field.name }}"> 
                                     {% else %}
                                     <label class="">Date</label>
-                                    <input class="input" type="date" name="blog_post_date" value="{{ field.value|date:'Y-m-d' }}" />
+                                    <input class="input mb-5" type="date" name="post_date" value="{{ field.value|date:'Y-m-d' }}" />
                                     {% endif %}
                                 
                                         {% for error in field.errors %}
@@ -116,6 +140,9 @@
                                         </div>
                                         {% endfor %}                               
                                     {% endfor %}
+
+                                    <input class="input" type="hidden" name="id" value="{{ id }}" />
+
                                     <button class="button" type="submit" name="submit" value="update_blog">Save Changes</button>
                                 </form>
                                 
@@ -171,22 +198,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for form in edit_sub_forms %}
-                        <tr>
-                            <td class="sub-name">{{ form.name.value }}</td>
-                            <td class="is-hidden-tablet">{{ form.email.value|truncatechars:10 }}</td>
-                            <td class="is-hidden-mobile is-visible-tablet is-hidden-desktop">{{ form.email.value|truncatechars:20 }}</td>
-                            <td class="unique-field is-hidden-touch">{{ form.email.value }}</td>
-                            
-                            <td class="is-hidden-mobile">{{ form.number.value }}</td>
-                            <td class="edit-btn"><i class="far fa-edit"></i></td>
-                            <td id="deletesub_{{ form.id.value }}" class="delete-sub"><i class="far fa-trash-alt"></i></td>
-                        </tr>
+                    {% for id, form in edit_sub_forms.items %}
+                    
+                        {% for sub in subscribers %}
+                            {% if sub.id == id %}
+                            <tr>
+                                <td class="sub-name">{{ sub.name }}</td>
+                                <td class="is-hidden-tablet">{{ sub.email|truncatechars:10 }}</td>
+                                <td class="is-hidden-mobile is-visible-tablet is-hidden-desktop">{{ sub.email|truncatechars:20 }}</td>
+                                <td class="unique-field is-hidden-touch">{{ sub.email }}</td>
+                                
+                                <td class="is-hidden-mobile">{{ sub.number }}</td>
+                                <td class="edit-btn"><i class="far fa-edit"></i></td>
+                                <td id="deletesub_{{ sub.id }}" class="delete-sub"><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
 
                     
                         <tr class="edit-row" id="edit_subrow_{{ form.id.value }}">
                             <td colspan="12">
-                                <form action="{% url 'edit_subscriber' %}" method="POST" class="content-item sub_content_form">
+                                <form action="{% url 'cms' %}" method="POST" class="content-item sub_content_form">
                                     {% csrf_token %}
                                     {% for field in form %}
                                         
@@ -206,6 +238,7 @@
                                         </div>
                                         {% endfor %}                               
                                     {% endfor %}
+                                    
                                     <button class="button" type="submit" name="submit" value="update_subscriber">Save Changes</button>
                                 </form>
                                 
@@ -227,7 +260,10 @@
         <div class="modal-content center">
             <p class="modal-text">Are you sure you want to delete the <span class="insert-del-item"></span>?</p>
             <div class="modal-button-container">
-                <button class="button is-danger modal-confirm">Delete <span class="del-item"></span></button>
+                <form id="deleteitem_form">
+                    {% csrf_token %}
+                    <button class="button is-danger modal-confirm">Delete <span class="del-item"></span></button>
+                </form>
                 <button class="button modal-cancel">Keep <span class="del-item"></span></button>
             </div>
         </div>

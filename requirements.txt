@@ -8,6 +8,7 @@ django-upload-validator==1.1.5
 libsass==0.20.1
 oauthlib==3.1.0
 phonenumberslite==8.12.17
+Pillow==8.1.0
 PyJWT==2.0.1
 python-magic==0.4.18
 python3-openid==3.2.0

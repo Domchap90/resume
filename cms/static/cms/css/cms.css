@@ -42,6 +42,18 @@ form input::placeholder {
     color: var(--primary-text-color);
 }
 
+.file-name {
+    /* override CSS bulma */
+    max-width: 300px;
+    width: 300px;
+    text-align: center;
+}
+
+.input#number, .input#id_number {
+    /* add space to bottom of last input in subscriber form*/
+    margin-bottom: 1.5rem;
+}
+
 #blog_content p, #blog_content table {
     color: var(--primary-text-color);
 }
