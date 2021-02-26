@@ -1,10 +1,12 @@
 from django.conf import settings
 from django.shortcuts import render
-from .models import Blog
-from tika import parser
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from .models import Blog
 import os
 import re
+
+from tika import parser
 
 
 def blog(request):
@@ -20,8 +22,19 @@ def blog(request):
         pdf_extract = get_blog_extract(pdf_content, 250)
         blog_extract_list.append([blog, pdf_extract])
 
+    pagenum = request.GET.get('pagenum', 1)
+
+    blogs_paginated = Paginator(blog_extract_list, 5)
+
+    try:
+        blog_page_objects = blogs_paginated.page(pagenum)
+    except PageNotAnInteger:
+        blog_page_objects = blogs_paginated.page(1)
+    except EmptyPage:
+        blog_page_objects = blogs_paginated.page(blogs_paginated.num_pages)
+
     context = {
-        'blogs': blog_extract_list,
+        'blogs': blog_page_objects,
     }
 
     return render(request, 'blog/blog.html', context)
