@@ -12,17 +12,9 @@
     max-width: 600px;
 }
 
-.featured-blog-bg {
-    background: url('/static/images/blog_solving_algos.jpg');
-    background-position: center; 
-    background-repeat: no-repeat;
-    background-size: contain; 
-}
-
-#featured_blog_overlay {
-    position: absolute;
-    top: 80%;
-    left: 10%;
+#featured_blog_img {
+    display: flex;
+    justify-content: center;
 }
 
 .blog-button-container {
