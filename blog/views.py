@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Blog
+from cms.forms import SubscriberForm
+from cms.models import Subscriber
 import os
 import re
 
@@ -33,8 +35,25 @@ def blog(request):
     except EmptyPage:
         blog_page_objects = blogs_paginated.page(blogs_paginated.num_pages)
 
+    form = SubscriberForm()
+
+    if request.POST:
+        form = SubscriberForm(request.POST)
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        number = request.POST.get('number')
+
+        if form.is_valid():
+            subscriber = Subscriber(
+                name=name,
+                email=email,
+                number=number)
+            subscriber.save()
+            form = SubscriberForm()
+
     context = {
         'blogs': blog_page_objects,
+        'sub_signup_form': form
     }
 
     return render(request, 'blog/blog.html', context)

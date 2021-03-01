@@ -725,3 +725,20 @@ img, .tile {
         width: 550px;
     }
 }
+
+
+/******************************************* Subscriber Form (in blog and cms app) */
+
+form > * {
+    margin-bottom: 10px;
+}
+
+.content-item {
+    margin: 0 auto;
+    width: 300px;
+}
+
+.input#number, .input#id_number {
+    /* add space to bottom of last input in subscriber form*/
+    margin-bottom: 1.5rem;
+}

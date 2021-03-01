@@ -163,26 +163,9 @@
             <div id="subscriber_content">
                 <h2 class="feature-title">Subscriber content</h2>
                 <p class="content-item center mt-3 mb-6">Add new subscriber</p>
-                <form action="{% url 'cms' %}" method="POST" class="content-item sub_content_form" id="add_sub_form">
+                <form action="{% url 'cms' %}" method="POST" class="content-item sub-content-form" id="add_sub_form">
                     {% csrf_token %}
                     {{ add_sub_form.as_p }}
-                    <!-- {% for field in add_sub_form %}
-                        {% if field.name == "email" %}
-                            <label>{{ field.label }}</label>
-                            <input class="input" type="email" name="{{ field.name }}" id="{{ field.name }}" placeholder="{{ field.placeholder }}">
-                        {% else %}
-                            <label>{{ field.label }}</label>
-                            <input class="input" type="text" name="{{ field.name }}" id="{{ field.name }}" placeholder="{{ field.placeholder }}">
-                        {% endif %}
-
-                        {% for error in field.errors %}
-                        <div class="alert alert-danger">
-                            <strong class="help is-danger">{{ error }}</strong>
-                        </div>
-                        {% endfor %}
-                        
-                    {% endfor %}
-                    -->
                     <button class="button" type="submit" name="submit" value="add_subscriber">Add Subscriber</button>
                 </form>
                 <h2 class="feature-title mt-6">Edit Email Subscribers</h2>
@@ -218,7 +201,7 @@
                     
                         <tr class="edit-row" id="edit_subrow_{{ form.id.value }}">
                             <td colspan="12">
-                                <form action="{% url 'cms' %}" method="POST" class="content-item sub_content_form">
+                                <form action="{% url 'cms' %}" method="POST" class="content-item sub-content-form">
                                     {% csrf_token %}
                                     {% for field in form %}
                                         
@@ -280,4 +263,5 @@
         const csrfToken = "{{ csrf_token }}";
     </script>
     <script src="{% static 'cms/js/cms.js' %}" type="text/javascript"></script>
+    <script src="{% static 'cms/js/subscriber.js' %}" type="text/javascript"></script>
 {% endblock %}
