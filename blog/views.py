@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 from .models import Blog
 from cms.forms import SubscriberForm
@@ -49,6 +51,9 @@ def blog(request):
                 email=email,
                 number=number)
             subscriber.save()
+
+            notify_subscriber_on_signup(subscriber)
+            # reset empty form
             form = SubscriberForm()
 
     context = {
@@ -85,3 +90,14 @@ def get_blog_extract(content, extract_len):
             break
 
     return extract + "..."
+
+
+def notify_subscriber_on_signup(recipient):
+    subject = "Sign up DC mailing list"
+    message = render_to_string('blog/email/body.txt', {'name': recipient.name})
+    try:
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
+                  [recipient.email], fail_silently=False)
+    except IOError:
+        # Will catch both SMTPException AND socket.error
+        print("Unable to send email at this time.")
