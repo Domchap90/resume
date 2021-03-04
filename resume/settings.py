@@ -13,7 +13,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', '')
 DEBUG = True
 # os.environ.get('DEVELOPMENT')
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', 'dom-resume.herokuapp.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
