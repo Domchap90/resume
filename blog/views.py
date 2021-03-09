@@ -2,6 +2,8 @@ from django.conf import settings
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
+from django.core.files.base import ContentFile
+from django.http import FileResponse, Http404, HttpResponse
 from django.template.loader import render_to_string
 
 from .models import Blog
@@ -101,3 +103,34 @@ def notify_subscriber_on_signup(recipient):
     except IOError:
         # Will catch both SMTPException AND socket.error
         print("Unable to send email at this time.")
+
+
+def read_blog(request, blog_id):
+    blog = Blog.objects.get(id=blog_id)
+    file_path = str(blog.file)
+    # try:
+    #     pdf_view(file_path)
+    # except Http404:
+    #     pdf = "Sorry the file could not be found at this time."
+
+    context = {
+        'blog': blog,
+        'blog_file': file_path
+    }
+
+    return render(request, 'blog/read_blog.html', context)
+
+
+def pdf_view(request, year, month, day, filename):
+    file_path = settings.MEDIA_ROOT + "/blogs/\
+" + year + "/" + month + "/" + day + "/" + filename
+    print(f"\nview entered with file path = {file_path}\n")
+    try:
+        # pdf_file = FileResponse(open(pdf, 'rb'))
+        # pdf_file['Content-Disposition'] = f'inline;filename={pdf}'
+        # return pdf_file
+        return FileResponse(
+            open(file_path, 'rb'), content_type='application/pdf'
+            )
+    except FileNotFoundError:
+        raise Http404()

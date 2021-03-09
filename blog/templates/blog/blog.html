@@ -3,6 +3,7 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -52,7 +53,7 @@
             (Extract from blog) {{ blog.1 }}
             </p>
             <div class="blog-button-container center right">
-                <a class="button" href="">Read</a>
+                <a class="button" href="{% url 'read_blog' blog.0.id %}">Read</a>
             </div>
             {% endfor %}
             <hr>

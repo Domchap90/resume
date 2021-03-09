@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="below-nav">
+     <div class="hero blog-banner-bg">
+        <div class="banner-overlay">
+            <div class="container central-container tagline-container">
+                <h1 class="tagline primary-txt">BLOG</h1>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero feature">
+        <div class="container central-container">
+            <h2 class="feature-title mb-5">
+               {{ blog.title }}
+            </h2>
+            
+        </div>
+
+        <div class="container central-container center">
+            <div id="blog_frame_container">
+
+                <iframe src="pdf_view/{{ blog_file }}#toolbar=0&navpanes=0&scrollbar=0" frameborder="0" class="feature-title black-txt" id="blog_frame">
+                </iframe>
+                
+
+            </div>
+        </div>
+
+    </section>
+
+</div>
+{% endblock %}
