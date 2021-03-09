@@ -108,14 +108,12 @@ def notify_subscriber_on_signup(recipient):
 def read_blog(request, blog_id):
     blog = Blog.objects.get(id=blog_id)
     file_path = str(blog.file)
-    # try:
-    #     pdf_view(file_path)
-    # except Http404:
-    #     pdf = "Sorry the file could not be found at this time."
+    other_blogs = Blog.objects.all().order_by('-post_date').exclude(id=blog_id)[:3]
 
     context = {
         'blog': blog,
-        'blog_file': file_path
+        'blog_file': file_path,
+        'others': other_blogs
     }
 
     return render(request, 'blog/read_blog.html', context)
@@ -126,11 +124,8 @@ def pdf_view(request, year, month, day, filename):
 " + year + "/" + month + "/" + day + "/" + filename
     print(f"\nview entered with file path = {file_path}\n")
     try:
-        # pdf_file = FileResponse(open(pdf, 'rb'))
-        # pdf_file['Content-Disposition'] = f'inline;filename={pdf}'
-        # return pdf_file
         return FileResponse(
             open(file_path, 'rb'), content_type='application/pdf'
             )
     except FileNotFoundError:
-        raise Http404()
+        raise Http404

@@ -387,6 +387,15 @@ section {
     text-decoration: none;
 }
 
+.nav-button {
+    background-color: #fff !important;
+    color: var(--button-bg-color) !important;
+}
+
+.nav-button:hover {
+    color: var(--tertiary-text-color) !important;
+}
+
 .blog-bg {
     background: url('/static/images/home_blog.jpg');
     background-position: center; 

@@ -30,8 +30,25 @@
                 <iframe src="pdf_view/{{ blog_file }}#toolbar=0&navpanes=0&scrollbar=0" frameborder="0" class="feature-title black-txt" id="blog_frame">
                 </iframe>
                 
-
             </div>
+        </div>
+
+        <div class="container central-container mb-5">
+            <h3 class="white-txt secondary-txt mb-3">Other Blogs</h3>
+
+            {% for blog in others %} 
+                <hr>
+                <p class="date">{{ blog.date }}</p>
+                <h4 class="blog-title">{{ blog.title }}</h4>
+                
+            
+                <div class="blog-button-container center right">
+                    <a class="button" href="{% url 'read_blog' blog.id %}">Read</a>
+                </div>
+            {% endfor %}
+
+            <a class="button nav-button" href="{% url 'blog' %}">Back to Signup Page</a>
+
         </div>
 
     </section>
