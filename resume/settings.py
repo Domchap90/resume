@@ -13,7 +13,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', '')
 DEBUG = True
 # os.environ.get('DEVELOPMENT')
 
-ALLOWED_HOSTS = ['localhost', 'dom-resume.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'www.dc-webdeveloper.com', 'dc-webdeveloper.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -77,11 +77,7 @@ WSGI_APPLICATION = 'resume.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-if 'DATABASE_URL' in os.environ:
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-    }
-else:
+if 'DEVELOPMENT' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -90,6 +86,18 @@ else:
                 'NAME': 'testdb',
             },
         }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'domchapl_resume',
+            'USER': 'domchapl_dom',
+            'PASSWORD': os.environ.get('POSTGRES_PASS'),
+            'HOST': 'dc-webdeveloper.com',
+            'PORT': '5432',
+        }
+
     }
 
 
