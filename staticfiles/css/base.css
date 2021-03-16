@@ -387,6 +387,15 @@ section {
     text-decoration: none;
 }
 
+.nav-button {
+    background-color: #fff !important;
+    color: var(--button-bg-color) !important;
+}
+
+.nav-button:hover {
+    color: var(--tertiary-text-color) !important;
+}
+
 .blog-bg {
     background: url('/static/images/home_blog.jpg');
     background-position: center; 
@@ -724,4 +733,21 @@ img, .tile {
     #contact_form .textarea {
         width: 550px;
     }
+}
+
+
+/******************************************* Subscriber Form (in blog and cms app) */
+
+form > * {
+    margin-bottom: 10px;
+}
+
+.content-item {
+    margin: 0 auto;
+    width: 300px;
+}
+
+.input#number, .input#id_number {
+    /* add space to bottom of last input in subscriber form*/
+    margin-bottom: 1.5rem;
 }
