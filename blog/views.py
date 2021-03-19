@@ -12,7 +12,7 @@ from cms.models import Subscriber
 import os
 import re
 
-from tika import parser
+import fitz
 
 
 def blog(request):
@@ -22,10 +22,16 @@ def blog(request):
     for blog in blogs:
         print(f"image = {blog.image}")
         file_path = os.path.join(settings.MEDIA_ROOT, str(blog.file))
-        parsed_pdf = parser.from_file(file_path)
-        pdf_content = parsed_pdf['content']
+        file = fitz.open(file_path)
+        blog_text = ""
+        for page in file.pages(stop=1):
+            blog_text += page.getText()
+            print(f"first_page_text = {blog_text}")
 
-        pdf_extract = get_blog_extract(pdf_content, 250)
+        # parsed_pdf = parser.from_file(file_path)
+        # pdf_content = parsed_pdf['content']
+
+        pdf_extract = get_blog_extract(blog_text, 250)
         blog_extract_list.append([blog, pdf_extract])
 
     pagenum = request.GET.get('pagenum', 1)
