@@ -2,8 +2,7 @@ from django.conf import settings
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
-from django.core.files.base import ContentFile
-from django.http import FileResponse, Http404, HttpResponse
+from django.http import FileResponse, Http404
 from django.template.loader import render_to_string
 
 from .models import Blog
@@ -20,16 +19,11 @@ def blog(request):
     blog_extract_list = []
 
     for blog in blogs:
-        print(f"image = {blog.image}")
         file_path = os.path.join(settings.MEDIA_ROOT, str(blog.file))
         file = fitz.open(file_path)
         blog_text = ""
         for page in file.pages(stop=1):
             blog_text += page.getText()
-            print(f"first_page_text = {blog_text}")
-
-        # parsed_pdf = parser.from_file(file_path)
-        # pdf_content = parsed_pdf['content']
 
         pdf_extract = get_blog_extract(blog_text, 250)
         blog_extract_list.append([blog, pdf_extract])
@@ -114,7 +108,8 @@ def notify_subscriber_on_signup(recipient):
 def read_blog(request, blog_id):
     blog = Blog.objects.get(id=blog_id)
     file_path = str(blog.file)
-    other_blogs = Blog.objects.all().order_by('-post_date').exclude(id=blog_id)[:3]
+    other_blogs = Blog.objects.all().order_by('-post_date').exclude(
+        id=blog_id)[:3]
 
     context = {
         'blog': blog,
@@ -128,7 +123,6 @@ def read_blog(request, blog_id):
 def pdf_view(request, year, month, day, filename):
     file_path = settings.MEDIA_ROOT + "/blogs/\
 " + year + "/" + month + "/" + day + "/" + filename
-    print(f"\nview entered with file path = {file_path}\n")
     try:
         return FileResponse(
             open(file_path, 'rb'), content_type='application/pdf'
