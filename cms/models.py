@@ -7,7 +7,7 @@ class Subscriber(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=80, null=False, blank=False,
                               validators=[validate_email])
-    number = PhoneNumberField(unique=True, null=True, blank=True)
+    number = PhoneNumberField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
         super(Subscriber, self).save(*args, **kwargs)

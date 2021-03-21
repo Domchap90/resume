@@ -14,7 +14,7 @@ class SubscriberForm(forms.Form):
     def clean_number(self):
         number = self.cleaned_data['number']
         for sub in Subscriber.objects.all():
-            if number == sub.number:
+            if number == sub.number and len(number) > 0:
                 raise forms.ValidationError(
                     "This number already exists within our records.")
 
