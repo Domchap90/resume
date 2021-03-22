@@ -12,6 +12,8 @@ import os
 import re
 
 import fitz
+from mailchimp_marketing import Client
+from mailchimp_marketing.api_client import ApiClientError
 
 
 def blog(request):
@@ -55,6 +57,7 @@ def blog(request):
             subscriber.save()
 
             notify_subscriber_on_signup(subscriber)
+            add_subscriber_to_mailchimp(subscriber)
             # reset empty form
             form = SubscriberForm()
 
@@ -103,6 +106,46 @@ def notify_subscriber_on_signup(recipient):
     except IOError:
         # Will catch both SMTPException AND socket.error
         print("Unable to send email at this time.")
+
+
+def add_subscriber_to_mailchimp(user):
+    """
+     Contains code handling the communication to the mailchimp api
+     to create a contact/member in an audience/list.
+    """
+
+    # Mailchimp Settings
+    api_key = settings.MAILCHIMP_API_KEY
+    server = settings.MAILCHIMP_DATA_CENTER
+    list_id = settings.MAILCHIMP_SUBSCRIBE_LIST_ID
+
+    name_list = user.name.split(" ")
+    fname = name_list[0]
+    lname = ''
+    if len(name_list) > 1:
+        lname = name_list[1]
+
+    mailchimp = Client()
+    mailchimp.set_config({
+        "api_key": api_key,
+        "server": server,
+    })
+
+    member_info = {
+        "email_address": user.email,
+        "status": "subscribed",
+        'merge_fields': {
+            'FNAME': fname,
+            'LNAME': lname,
+            'PHONE': str(user.number)
+            }
+    }
+
+    try:
+        response = mailchimp.lists.add_list_member(list_id, member_info)
+        print("response: {}".format(response))
+    except ApiClientError as error:
+        print("An exception occurred: {}".format(error.text))
 
 
 def read_blog(request, blog_id):
