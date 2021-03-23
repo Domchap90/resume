@@ -5,11 +5,13 @@ from django.core.mail import send_mail
 from django.http import FileResponse, Http404
 from django.template.loader import render_to_string
 
+from django.contrib import messages
 from .models import Blog
 from cms.forms import SubscriberForm
 from cms.models import Subscriber
 import os
 import re
+import json
 
 import fitz
 from mailchimp_marketing import Client
@@ -56,8 +58,8 @@ def blog(request):
                 number=number)
             subscriber.save()
 
-            notify_subscriber_on_signup(subscriber)
-            add_subscriber_to_mailchimp(subscriber)
+            notify_subscriber_on_signup(request, subscriber)
+            add_subscriber_to_mailchimp(request, subscriber)
             # reset empty form
             form = SubscriberForm()
 
@@ -97,18 +99,21 @@ def get_blog_extract(content, extract_len):
     return extract + "..."
 
 
-def notify_subscriber_on_signup(recipient):
+def notify_subscriber_on_signup(request, recipient):
     subject = "Sign up DC mailing list"
     message = render_to_string('blog/email/body.txt', {'name': recipient.name})
     try:
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
                   [recipient.email], fail_silently=False)
+        messages.success(request, "Thank you for signing up. An email has been \
+sent to {}, please check your inbox.".format(recipient.email))
     except IOError:
         # Will catch both SMTPException AND socket.error
-        print("Unable to send email at this time.")
+        messages.error(request, "Unable to send email at this time. Please check the\
+email address is valid and try again.")
 
 
-def add_subscriber_to_mailchimp(user):
+def add_subscriber_to_mailchimp(request, user):
     """
      Contains code handling the communication to the mailchimp api
      to create a contact/member in an audience/list.
@@ -142,10 +147,11 @@ def add_subscriber_to_mailchimp(user):
     }
 
     try:
-        response = mailchimp.lists.add_list_member(list_id, member_info)
-        print("response: {}".format(response))
+        mailchimp.lists.add_list_member(list_id, member_info)
     except ApiClientError as error:
-        print("An exception occurred: {}".format(error.text))
+        err_dict = json.loads(error.text)
+        messages.error(request, "Unable to add to Mailchimp: {}".format(
+            err_dict['detail']))
 
 
 def read_blog(request, blog_id):
