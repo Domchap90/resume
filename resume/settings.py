@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_simple_bulma',
+    'compressor',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -170,9 +171,21 @@ STATICFILES_FINDERS = [
   'django.contrib.staticfiles.finders.FileSystemFinder',
   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 
+  # Allows SASS files to be read
+  'compressor.finders.CompressorFinder',
+
   # Now add our custom SimpleBulma one.
   'django_simple_bulma.finders.SimpleBulmaFinder',
 ]
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
+if 'DEVELOPMENT' not in os.environ:
+    COMPRESS_OFFLINE = True
+    LIBSASS_OUTPUT_STYLE = 'compressed'
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 # Custom settings for django-simple-bulma
 BULMA_SETTINGS = {
