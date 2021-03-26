@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" class="has-navbar-fixed-top">
+
 {% load static %}
+{% load compress %}
+
     <head>
         <title>Dominic Chaple Web Developer</title>
         {% block meta %}
@@ -19,9 +22,12 @@
         {% load django_simple_bulma %}
         {% bulma %}
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
-        <script src="https://kit.fontawesome.com/d19a086ec7.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <script src="https://kit.fontawesome.com/d19a086ec7.js" crossorigin="anonymous"></script>  
         {% endblock %}
+
+        {% compress css %}
+            <link type="text/x-scss" href="{% static 'scss/base.scss' %}" rel="stylesheet" media="screen">
+        {% endcompress %}
     
         {% block extra_css %}
         {% endblock %}
