@@ -31,20 +31,25 @@ for (let m of messages) {
     }
 }
 
-function highlightEmail(stringWithEmail) {
+function highlightEmail(stringToHighlight) {
     const emailFormat = /([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})/;
-    const emailIndex = stringWithEmail.search(emailFormat);
-    const email = stringWithEmail.match(emailFormat)[0];
-    const emailLen = email.length;
-
-    let adjustedString = stringWithEmail;
+    const emailIndex = stringToHighlight.search(emailFormat);
 
     if (emailIndex !== -1) {
-        adjustedString = stringWithEmail.slice(0, emailIndex) + `<strong>`
-        + email + `</strong>` + stringWithEmail.slice(emailIndex+emailLen);
-    }
+        // Dealing with case where email exists
+        const email = stringToHighlight.match(emailFormat)[0];
+        const emailLen = email.length;
 
-    return adjustedString;
+        let adjustedString = stringToHighlight;
+
+        if (emailIndex !== -1) {
+            adjustedString = stringToHighlight.slice(0, emailIndex) + `<strong>`
+            + email + `</strong>` + stringToHighlight.slice(emailIndex+emailLen);
+        }
+
+        return adjustedString;
+    }
+    return stringToHighlight;
 }
    
 function firstSentenceOnly(string) {
