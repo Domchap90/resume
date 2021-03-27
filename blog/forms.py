@@ -7,20 +7,6 @@ from .models import Blog
 
 
 class BlogForm(forms.ModelForm):
-    # file = forms.FileField(
-    #     label='Upload File',
-    #     help_text='max size 100 kB',
-    # )
-    # title = forms.CharField(max_length=50)
-    # post_date = forms.DateField(
-    #     input_formats=settings.DATE_INPUT_FORMATS, required=False)
-    # image = forms.FileField(
-    #     label='Upload Image ',
-    #     help_text='max size 1 MB',
-    # )
-    # id = forms.CharField(widget=forms.HiddenInput(), required=False)
-    # edit = forms.BooleanField(
-    #     widget=forms.HiddenInput(), required=False, initial=False)
     class Meta:
         model = Blog
         fields = ['file', 'title', 'post_date', 'image']
@@ -30,14 +16,6 @@ class BlogForm(forms.ModelForm):
         return validate_file_upload(
             file, ['pdf'], settings.MAX_FILE_UPLOAD_SIZE)
 
-    # def clean_title(self):
-    #     # Ensure title is unique
-    #     title = self.cleaned_data['title']
-
-    #     for blog in Blog.objects.all():
-    #         if title == blog.title:
-    #             raise forms.ValidationError("This title already exists.")
-
     def clean_image(self):
         image = self.cleaned_data['image']
         return validate_file_upload(
@@ -45,16 +23,6 @@ class BlogForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(BlogForm, self).__init__(*args, **kwargs)
-
-        # labels = {
-        #     'name': 'Name',
-        #     'mobile_number': 'Mobile',
-        #     'email': 'Email Address',
-        #     'address_line1': 'Address Line 1',
-        #     'address_line2': 'Address Line 2',
-        #     'postcode': 'Post Code',
-        #     'delivery_instructions': 'Delivery Instructions'
-        # }
 
         for field in self.fields:
             if field != 'post_date':
