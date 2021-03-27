@@ -21,7 +21,8 @@
                 </p>
             </div>
             <div id="contact_form_container">
-                <form id="contact_form">
+                <form action="{% url 'contact' %}" method="POST" id="contact_form">
+                    {% csrf_token %}
                     {{ form.as_p }}
                     <button class="button" type="submit">Send Message</button>
                 </form>
