@@ -574,6 +574,10 @@ img, .tile {
     color: var(--primary-text-color);
 }
 
+.small-print {
+    font-style: italic;
+}
+
 @media (min-width: 769px) {
     .service-icon {
         height: 150px;
