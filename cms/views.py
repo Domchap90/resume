@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect
-from django.contrib.admin.views.decorators import staff_member_required
 from datetime import datetime
 
-from blog.models import Blog
+from django.contrib.admin.views.decorators import staff_member_required
+from django.shortcuts import redirect, render
+
 from blog.forms import BlogForm
-from .models import Subscriber
+from blog.models import Blog
+
 from .forms import SubscriberForm
+from .models import Subscriber
 
 
 @staff_member_required

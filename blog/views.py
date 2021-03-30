@@ -1,21 +1,22 @@
-from django.conf import settings
-from django.shortcuts import render
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.core.mail import send_mail
-from django.http import FileResponse, Http404
-from django.template.loader import render_to_string
-
-from django.contrib import messages
-from .models import Blog
-from cms.forms import SubscriberForm
-from cms.models import Subscriber
+import json
 import os
 import re
-import json
 
 import fitz
+from django.conf import settings
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.http import FileResponse, Http404
+from django.shortcuts import render
+from django.template.loader import render_to_string
 from mailchimp_marketing import Client
 from mailchimp_marketing.api_client import ApiClientError
+
+from cms.forms import SubscriberForm
+from cms.models import Subscriber
+
+from .models import Blog
 
 
 def blog(request):

@@ -1,4 +1,5 @@
 import os
+
 # from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -185,7 +186,7 @@ COMPRESS_PRECOMPILERS = (
 if 'DEVELOPMENT' not in os.environ:
     COMPRESS_OFFLINE = True
     LIBSASS_OUTPUT_STYLE = 'compressed'
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+    # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 # Custom settings for django-simple-bulma
 BULMA_SETTINGS = {
