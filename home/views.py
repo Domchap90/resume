@@ -29,7 +29,6 @@ def contact(request):
     form = ContactForm()
 
     if request.POST:
-        print(f"")
         subject = "Message from contact page (DC webdeveloper)"
         message = "Message sent:\n\n" + request.POST["message"] + "\n\n\n\
 Sent from: " + request.POST['name'] + "\nNumber given: \

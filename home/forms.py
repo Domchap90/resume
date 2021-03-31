@@ -12,8 +12,11 @@ class ContactForm(forms.Form):
         widget=forms.TextInput(attrs={'placeholder': '01632 960481'}))
     email = forms.EmailField(
         label='Email*', validators=[validate_email],
-        widget=forms.EmailInput(attrs={'placeholder': 'username@domain.co.uk'}))
+        widget=forms.EmailInput(
+            attrs={'placeholder': 'username@domain.co.uk'})
+            )
     message = forms.CharField(
         label='Message*', max_length=500,
-        widget=forms.Textarea(attrs={'placeholder': 'Tell me how i can help you...'})
-                            )
+        widget=forms.Textarea(
+            attrs={'placeholder': 'Tell me how i can help you...'})
+            )
