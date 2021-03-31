@@ -1,7 +1,5 @@
 import os
 
-# from pathlib import Path
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY', '')
@@ -10,11 +8,12 @@ SECRET_KEY = os.getenv('SECRET_KEY', '')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-DEBUG = True
-# os.environ.get('DEVELOPMENT')
+if 'DEVELOPMENT' in os.environ:
+    DEBUG = True
+else:
+    DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', 'www.dc-webdeveloper.com', 'dc-webdeveloper.com',
-                 'dom-resume.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'www.dc-webdeveloper.com', 'dc-webdeveloper.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -168,14 +167,13 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 STATICFILES_FINDERS = [
-  # First add the two default Finders, since this will overwrite the default.
+  # First adding default Finders, since this will overwrite the default.
   'django.contrib.staticfiles.finders.FileSystemFinder',
   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 
   # Allows SASS files to be read
   'compressor.finders.CompressorFinder',
 
-  # Now add our custom SimpleBulma one.
   'django_simple_bulma.finders.SimpleBulmaFinder',
 ]
 
@@ -213,9 +211,10 @@ else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_USE_TLS = True
     EMAIL_PORT = 587
-    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST = 'mail.dc-webdeveloper.com'
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+    SERVER_EMAIL = os.environ.get('EMAIL_HOST_USER')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
 MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_API_KEY')
