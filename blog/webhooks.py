@@ -1,24 +1,27 @@
-import json
-from operator import itemgetter
+from urllib.parse import parse_qs
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-from django.core.exceptions import ObjectDoesNotExist
 
 from cms.models import Subscriber
-from urllib.parse import parse_qs
+
+from .views import notify_subscriber_on_signup
 
 
-# @require_POST
+@require_POST
 @csrf_exempt
 def sync_mailchimp_subscribers(request):
+    """
+    When the audience list is adjusted via mailchimp site this view will
+    receive the webhook and update the database accordingly.
+    One webhook is sent per subscription/ unsubscription.
+    """
+
     raw_response = request.body
-    print(f"request body = {raw_response} is of type = {type(raw_response)}")
     response = parse_qs(raw_response.decode('UTF-8'))
-    print(f"wh_decoded = {response} is of type = {type(response)}")
     req_type = response['type'][0]
-    print(f"req_type = {req_type}")
 
     if req_type == "subscribe":
         fname_key = 'data[merges][FNAME]'
@@ -43,6 +46,7 @@ def sync_mailchimp_subscribers(request):
         sub_to_add = Subscriber.objects.create(name=name, email=email,
                                                number=number)
         sub_to_add.save()
+        notify_subscriber_on_signup(request, sub_to_add)
 
     elif req_type == "unsubscribe":
         sub_email = response['data[email]'][0]
