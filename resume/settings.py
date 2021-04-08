@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'blog',
     'cms',
     'phonenumber_field',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -159,12 +160,30 @@ DATE_INPUT_FORMATS = ['%Y-%m-%d']
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-STATIC_URL = '/static/'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_STORAGE_BUCKET_NAME = 'resume.static'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'mysite/static'),
+# ]
+if 'DEVELOPMENT' in os.environ:
+    STATIC_URL = '/static/'
+else:
+    STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 STATICFILES_FINDERS = [
   # First adding default Finders, since this will overwrite the default.
@@ -182,9 +201,7 @@ COMPRESS_PRECOMPILERS = (
 )
 
 if 'DEVELOPMENT' not in os.environ:
-    COMPRESS_OFFLINE = True
-    LIBSASS_OUTPUT_STYLE = 'compressed'
-    # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+    COMPRESS_OFFLINE = False
 
 # Custom settings for django-simple-bulma
 BULMA_SETTINGS = {
