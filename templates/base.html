@@ -83,9 +83,13 @@
             
         </header>
 
-        <div class="is-hidden-mobile" id="contact_tab">
-            <a href="#">contact me</a>
-        </div>
+        {% with request.resolver_match.url_name as url_name %}
+            {% if url_name != 'contact' %}
+                <div class="is-hidden-mobile" id="contact_tab">
+                    <a href="{% url 'contact' %}">contact me</a>
+                </div>
+            {% endif %}
+        {% endwith %}
 
         {% block content %}
         {% endblock %}
