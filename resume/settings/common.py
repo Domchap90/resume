@@ -5,16 +5,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY', '')
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
-if 'DEVELOPMENT' in os.environ:
-    DEBUG = True
-else:
-    DEBUG = False
-
-ALLOWED_HOSTS = ['localhost', 'www.dc-webdeveloper.com', 'dc-webdeveloper.com']
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -76,58 +66,6 @@ SITE_ID = 1
 
 WSGI_APPLICATION = 'resume.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-if 'DEVELOPMENT' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-            'TEST': {
-                'NAME': 'testdb',
-            },
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'domchapl_resume',
-            'USER': 'domchapl_dom',
-            'PASSWORD': os.environ.get('POSTGRES_PASS'),
-            'HOST': 'dc-webdeveloper.com',
-            'PORT': '5432',
-        }
-
-    }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.\
-UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.\
-MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.\
-CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.\
-NumericPasswordValidator',
-    },
-]
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
@@ -157,34 +95,14 @@ DATE_INPUT_FORMATS = ['%Y-%m-%d']
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# Media Settings
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_STORAGE_BUCKET_NAME = 'resume.static'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = 'static'
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'mysite/static'),
-# ]
-if 'DEVELOPMENT' in os.environ:
-    STATIC_URL = '/static/'
-else:
-    STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
+# Static Settings
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
 STATICFILES_FINDERS = [
   # First adding default Finders, since this will overwrite the default.
   'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -196,12 +114,12 @@ STATICFILES_FINDERS = [
   'django_simple_bulma.finders.SimpleBulmaFinder',
 ]
 
+# Compressor Settings
+LIBSASS_OUTPUT_STYLE = 'compressed'
+COMPRESS_ENABLED = True
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
-
-if 'DEVELOPMENT' not in os.environ:
-    COMPRESS_OFFLINE = False
 
 # Custom settings for django-simple-bulma
 BULMA_SETTINGS = {
@@ -221,19 +139,7 @@ BULMA_SETTINGS = {
     "fontawesome_token": "e761a01be3",
 }
 
-if 'DEVELOPMENT' in os.environ:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    DEFAULT_FROM_EMAIL = 'dom@dcwebdev.co.uk'
-else:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_USE_TLS = True
-    EMAIL_PORT = 587
-    EMAIL_HOST = 'mail.dc-webdeveloper.com'
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
-    SERVER_EMAIL = os.environ.get('EMAIL_HOST_USER')
-    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
-
+# Mailchimp settings
 MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_API_KEY')
 MAILCHIMP_DATA_CENTER = os.environ.get('MAILCHIMP_DATA_CENTER')
 MAILCHIMP_SUBSCRIBE_LIST_ID = os.environ.get('MAILCHIMP_SUBSCRIBE_LIST_ID')
