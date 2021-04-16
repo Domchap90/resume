@@ -1,6 +1,5 @@
 from settings.common import *
 
-
 DEBUG = False
 
 ALLOWED_HOSTS = ['www.dc-webdeveloper.com', 'dc-webdeveloper.com']

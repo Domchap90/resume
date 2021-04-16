@@ -1,6 +1,5 @@
 from resume.settings.common import *
 
-
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost']
