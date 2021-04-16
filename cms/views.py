@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render
 
 from blog.forms import BlogForm
 from blog.models import Blog
+from blog.views import add_subscriber_to_mailchimp, notify_subscriber_on_signup
 
 from .forms import SubscriberForm
 from .models import Subscriber
@@ -126,6 +127,8 @@ def add_subscriber(request):
             email=email,
             number=number)
         subscriber.save()
+        notify_subscriber_on_signup(request, subscriber)
+        add_subscriber_to_mailchimp(request, subscriber)
 
     return form
 

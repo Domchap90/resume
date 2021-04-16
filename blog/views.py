@@ -101,6 +101,10 @@ def get_blog_extract(content, extract_len):
 
 
 def notify_subscriber_on_signup(request, recipient):
+    """
+    Emails user that they have succesfully signed up to the mailing list
+    """
+
     subject = "Sign up DC mailing list"
     message = render_to_string('blog/email/body.txt', {'name': recipient.name})
     try:
