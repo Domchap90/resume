@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 import re
@@ -156,6 +157,37 @@ def add_subscriber_to_mailchimp(request, user):
     except ApiClientError as error:
         err_dict = json.loads(error.text)
         messages.error(request, "Unable to add to Mailchimp: {}".format(
+            err_dict['detail']))
+
+
+def delete_subscriber_from_mailchimp(request, member_email):
+    """
+     Deletes member selected from mailchimp
+    """
+
+    # Mailchimp Settings
+    api_key = settings.MAILCHIMP_API_KEY
+    server = settings.MAILCHIMP_DATA_CENTER
+    list_id = settings.MAILCHIMP_SUBSCRIBE_LIST_ID
+
+    mailchimp = Client()
+    mailchimp.set_config({
+        "api_key": api_key,
+        "server": server,
+    })
+
+    member_email_hash = hashlib.md5(
+        member_email.encode('utf-8').lower()).hexdigest()
+    member_update = {"status": "unsubscribed"}
+
+    try:
+        response = mailchimp.lists.update_list_member(
+            list_id, member_email_hash, member_update)
+        messages.success(
+            request, "Member successfully unsubscribed. {}".format(response))
+    except ApiClientError as error:
+        err_dict = json.loads(error.text)
+        messages.error(request, "Unable to delete from Mailchimp: {}".format(
             err_dict['detail']))
 
 
