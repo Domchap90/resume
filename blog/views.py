@@ -31,7 +31,7 @@ def blog(request):
         for page in file.pages(stop=1):
             blog_text += page.getText()
 
-        pdf_extract = get_blog_extract(blog_text, 250)
+        pdf_extract = get_blog_extract(blog_text, 250, blog.title)
         blog_extract_list.append([blog, pdf_extract])
 
     pagenum = request.GET.get('pagenum', 1)
@@ -73,30 +73,15 @@ def blog(request):
     return render(request, 'blog/blog.html', context)
 
 
-def get_blog_extract(content, extract_len):
+def get_blog_extract(content, extract_len, blog_title):
     # Get first 175 characters of each blog that aren't title
 
     content = content.strip()
-    lines = re.split('\n', content)
-    empty_line_counter = 0
-    char_counter = 0
-    extract = ""
+    # Eliminate line breaks
+    content = re.sub('\r?\n|\r', ' ', content)
 
-    for line in lines:
-        remaining_chars = extract_len - char_counter
-        if empty_line_counter < 2 and re.match("^\\s*$", line):
-            empty_line_counter += 1
-        elif empty_line_counter == 2:
-            if char_counter < extract_len:
-                if len(line) <= remaining_chars:
-                    char_counter += len(line)
-                    extract += line
-                else:
-                    char_counter += remaining_chars
-                    extract += line[:remaining_chars]
-
-        if char_counter == extract_len:
-            break
+    title_removed = re.sub(rf"{blog_title}.", "", content).lstrip()
+    extract = title_removed[:extract_len]
 
     return extract + "..."
 
